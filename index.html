@@ -445,7 +445,8 @@ const ADMIN_PSEUDO = 'Admin CSE';
       <div style="padding:10px 14px;font-size:13px;color:var(--text3);border-top:1px solid var(--border)">
         + Sur chaque match, deux questions bonus supplémentaires, valant chacune <strong style="color:var(--gold)">1 point fixe</strong> quelle que soit la phase :<br>
         🟢 <strong>Bonus Offensif</strong> : combien d'essais seront marqués au total dans le match ? (nombre exact requis)<br>
-        🔴 <strong>Bonus Défensif</strong> : quelle équipe mènera à la mi-temps ? (domicile / égalité / extérieur)
+        🔴 <strong>Bonus Défensif</strong> : quelle équipe mènera à la mi-temps ? (domicile / égalité / extérieur)<br>
+        <em>Ces deux bonus ne sont proposés que pour les matchs de la phase de poules.</em>
       </div>
     </div>
 
@@ -795,7 +796,7 @@ let appConfig = {
     "ARTICLE 2 – CONDITIONS DE PARTICIPATION|Le concours est gratuit et ouvert à l'ensemble des salariés de l'entreprise. Chaque participant ne peut créer qu'un seul compte. En cas de comptes multiples détectés, seul le premier compte enregistré sera pris en compte. Les membres du CSE sont autorisés à participer.",
     "ARTICLE 3 – MODALITÉS DE PARTICIPATION|La participation s'effectue via l'application en ligne dont le lien est communiqué par le CSE. Les pronostics doivent être saisis avant le coup d'envoi de chaque match. Les pronostics peuvent être modifiés librement jusqu'à la clôture de chaque match.",
     "ARTICLE 4 – PRONOSTICS SPÉCIAUX|Trois pronostics spéciaux sont à saisir avant le début du tournoi (1er octobre 2027) : le vainqueur de la Coupe du Monde, les quatre demi-finalistes (top 4), et le nombre total de points marqués durant la compétition (52 matchs). Ces pronostics sont verrouillés dès le coup d'envoi du premier match.",
-    "ARTICLE 5 – SYSTÈME DE POINTS|Pour chaque match, le pronostic consiste à choisir le résultat (1 = victoire de l'équipe à domicile, N = match nul, 2 = victoire de l'équipe à l'extérieur), ainsi qu'à répondre à deux questions bonus : Bonus Offensif (le nombre total d'essais marqués dans le match) et Bonus Défensif (l'équipe qui mènera à la mi-temps).<table style='width:100%;border-collapse:collapse;margin:8px 0 12px;font-size:14px'><thead><tr style='border-bottom:1px solid rgba(254,69,0,0.3)'><th style='text-align:left;padding:6px 8px;color:var(--gold);font-family:Bebas Neue,sans-serif;letter-spacing:1px'>Phase</th><th style='text-align:center;padding:6px 8px;color:var(--gold);font-family:Bebas Neue,sans-serif;letter-spacing:1px'>Bon résultat (1/N/2)</th></tr></thead><tbody><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Phase de poules</td><td style='text-align:center;padding:5px 8px'>1 pt</td></tr><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Huitièmes de finale</td><td style='text-align:center;padding:5px 8px'>3 pts</td></tr><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Quarts de finale</td><td style='text-align:center;padding:5px 8px'>4 pts</td></tr><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Demi-finales</td><td style='text-align:center;padding:5px 8px'>5 pts</td></tr><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Petite finale</td><td style='text-align:center;padding:5px 8px'>6 pts</td></tr><tr><td style='padding:5px 8px'>Finale</td><td style='text-align:center;padding:5px 8px'>8 pts</td></tr></tbody></table><table style='width:100%;border-collapse:collapse;margin:0 0 12px;font-size:14px'><thead><tr style='border-bottom:1px solid rgba(254,69,0,0.3)'><th style='text-align:left;padding:6px 8px;color:var(--gold);font-family:Bebas Neue,sans-serif;letter-spacing:1px'>Bonus par match</th><th style='text-align:center;padding:6px 8px;color:var(--gold);font-family:Bebas Neue,sans-serif;letter-spacing:1px'>Points</th></tr></thead><tbody><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Bonus Offensif — Nombre exact d'essais marqués dans le match</td><td style='text-align:center;padding:5px 8px'>1 pt fixe</td></tr><tr><td style='padding:5px 8px'>Bonus Défensif — Équipe qui mène à la mi-temps</td><td style='text-align:center;padding:5px 8px'>1 pt fixe</td></tr></tbody></table><table style='width:100%;border-collapse:collapse;margin:0 0 8px;font-size:14px'><thead><tr style='border-bottom:1px solid rgba(254,69,0,0.3)'><th style='text-align:left;padding:6px 8px;color:var(--gold);font-family:Bebas Neue,sans-serif;letter-spacing:1px'>Pronostic spécial</th><th style='text-align:center;padding:6px 8px;color:var(--gold);font-family:Bebas Neue,sans-serif;letter-spacing:1px'>Points</th></tr></thead><tbody><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Vainqueur du tournoi</td><td style='text-align:center;padding:5px 8px'>20 pts</td></tr><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Nombre exact de points marqués</td><td style='text-align:center;padding:5px 8px'>10 pts</td></tr><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Top 4 (par équipe correcte)</td><td style='text-align:center;padding:5px 8px'>5 pts</td></tr></tbody></table>Pour les phases finales, le résultat est celui à l'issue des 80 minutes réglementaires et des prolongations. Les coups de pied au but (tirs au but) ne sont pas pronostiqués.",
+    "ARTICLE 5 – SYSTÈME DE POINTS|Pour chaque match, le pronostic consiste à choisir le résultat (1 = victoire de l'équipe à domicile, N = match nul, 2 = victoire de l'équipe à l'extérieur), ainsi qu'à répondre, uniquement pour les matchs de la phase de poules, à deux questions bonus : Bonus Offensif (le nombre total d'essais marqués dans le match) et Bonus Défensif (l'équipe qui mènera à la mi-temps). Ces deux bonus ne s'appliquent pas aux matchs à élimination directe (Huitièmes à Finale).<table style='width:100%;border-collapse:collapse;margin:8px 0 12px;font-size:14px'><thead><tr style='border-bottom:1px solid rgba(254,69,0,0.3)'><th style='text-align:left;padding:6px 8px;color:var(--gold);font-family:Bebas Neue,sans-serif;letter-spacing:1px'>Phase</th><th style='text-align:center;padding:6px 8px;color:var(--gold);font-family:Bebas Neue,sans-serif;letter-spacing:1px'>Bon résultat (1/N/2)</th></tr></thead><tbody><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Phase de poules</td><td style='text-align:center;padding:5px 8px'>1 pt</td></tr><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Huitièmes de finale</td><td style='text-align:center;padding:5px 8px'>3 pts</td></tr><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Quarts de finale</td><td style='text-align:center;padding:5px 8px'>4 pts</td></tr><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Demi-finales</td><td style='text-align:center;padding:5px 8px'>5 pts</td></tr><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Petite finale</td><td style='text-align:center;padding:5px 8px'>6 pts</td></tr><tr><td style='padding:5px 8px'>Finale</td><td style='text-align:center;padding:5px 8px'>8 pts</td></tr></tbody></table><table style='width:100%;border-collapse:collapse;margin:0 0 12px;font-size:14px'><thead><tr style='border-bottom:1px solid rgba(254,69,0,0.3)'><th style='text-align:left;padding:6px 8px;color:var(--gold);font-family:Bebas Neue,sans-serif;letter-spacing:1px'>Bonus par match</th><th style='text-align:center;padding:6px 8px;color:var(--gold);font-family:Bebas Neue,sans-serif;letter-spacing:1px'>Points</th></tr></thead><tbody><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Bonus Offensif — Nombre exact d'essais marqués dans le match</td><td style='text-align:center;padding:5px 8px'>1 pt fixe</td></tr><tr><td style='padding:5px 8px'>Bonus Défensif — Équipe qui mène à la mi-temps</td><td style='text-align:center;padding:5px 8px'>1 pt fixe</td></tr></tbody></table><table style='width:100%;border-collapse:collapse;margin:0 0 8px;font-size:14px'><thead><tr style='border-bottom:1px solid rgba(254,69,0,0.3)'><th style='text-align:left;padding:6px 8px;color:var(--gold);font-family:Bebas Neue,sans-serif;letter-spacing:1px'>Pronostic spécial</th><th style='text-align:center;padding:6px 8px;color:var(--gold);font-family:Bebas Neue,sans-serif;letter-spacing:1px'>Points</th></tr></thead><tbody><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Vainqueur du tournoi</td><td style='text-align:center;padding:5px 8px'>20 pts</td></tr><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Nombre exact de points marqués</td><td style='text-align:center;padding:5px 8px'>10 pts</td></tr><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Top 4 (par équipe correcte)</td><td style='text-align:center;padding:5px 8px'>5 pts</td></tr></tbody></table>Pour les phases finales, le résultat est celui à l'issue des 80 minutes réglementaires et des prolongations. Les coups de pied au but (tirs au but) ne sont pas pronostiqués.",
     "ARTICLE 6 – CLASSEMENT|Le classement est établi en fonction du total de points cumulés. Il est évolutif pendant toute la durée du tournoi et définitif à l'issue de la validation de l'ensemble des résultats officiels. En cas d'égalité, le départage s'effectue par tirage au sort.",
     "ARTICLE 7 – DOTATIONS|Les dotations sont fournies par le CSE et attribuées aux 3 participants les mieux classés à l'issue du tournoi. La nature des lots sera communiquée séparément. Les lots ne peuvent faire l'objet d'aucune contrepartie financière et ne sont ni échangeables, ni remboursables.",
     "ARTICLE 8 – RESPONSABILITÉ|Le CSE se réserve le droit de modifier, reporter ou annuler le concours en cas de force majeure ou de circonstances exceptionnelles indépendantes de sa volonté. Aucune contestation ne pourra être formulée concernant : les résultats sportifs officiels, l'attribution des points, ou le classement final. Les décisions du CSE sont souveraines.",
@@ -1291,7 +1292,12 @@ function renderNextMatch() {
   const now = new Date();
   // Trouver le prochain match non verrouillé sans pronostic
   const next = ALL_MATCHES
-    .filter(m => !isLocked(m) && !(myPronos[m.id] && myPronos[m.id].pick && myPronos[m.id].bonus_def && myPronos[m.id].bonus_off !== undefined && myPronos[m.id].bonus_off !== null && myPronos[m.id].bonus_off !== ''))
+    .filter(m => {
+      if (isLocked(m)) return false;
+      const p = myPronos[m.id];
+      if (m.phase.startsWith('Poule')) return !(p && p.pick && p.bonus_def && p.bonus_off !== undefined && p.bonus_off !== null && p.bonus_off !== '');
+      return !(p && p.pick);
+    })
     .sort((a,b) => a.deadline - b.deadline)[0];
   if (!next) {
     el.innerHTML = '<span style="color:var(--green)">✓ Tous tes pronostics sont à jour !</span>';
@@ -1471,7 +1477,9 @@ function triesInput(m) {
   const ac = poolColor(m.phase) || 'var(--gold)';
   return `<div style="margin-top:8px">
     <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:5px">Bonus Offensif — Nombre total d'essais dans le match</div>
-    <input type="number" min="0" max="30" placeholder="–" value="${val}" oninput="schedulePronoSave(${m.id},'bonus_off',this.value)" style="width:44px;height:44px;padding:0;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;border-radius:6px;border:1px solid ${filled?ac:'var(--border)'};background:${filled?ac:'var(--bg3)'};color:${filled?'#fff':'var(--text)'};text-align:center;box-sizing:border-box">
+    <div style="display:flex;justify-content:center">
+      <input type="number" min="0" max="30" placeholder="–" value="${val}" oninput="schedulePronoSave(${m.id},'bonus_off',this.value)" style="width:44px;height:44px;padding:0;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;border-radius:6px;border:1px solid ${filled?ac:'var(--border)'};background:${filled?ac:'var(--bg3)'};color:${filled?'#fff':'var(--text)'};text-align:center;box-sizing:border-box">
+    </div>
   </div>`;
 }
 function matchRow(m) {
@@ -1506,8 +1514,9 @@ function matchRow(m) {
     const resDisplay = res ? `<span style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--text2)">${res.home}-${res.away} (${real})</span>` : '<span class="locked-badge">Verrouillé</span>';
     const myPick = pred.pick ? `<span style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--gold)">${pred.pick}</span>` : '<span style="color:var(--text3);font-size:13px">Pas de pronostic</span>';
     const ht = { home: m.home, draw: 'Égalité', away: m.away };
-    const bdLine = res ? `<div style="font-size:11px;color:${pred.bonus_def===res.bonus_def?'var(--green)':'var(--text3)'}">Bonus Défensif — Toi : ${ht[pred.bonus_def]||'–'} · Réel : ${ht[res.bonus_def]||'–'}</div>` : '';
-    const boLine = res ? `<div style="font-size:11px;color:${(pred.bonus_off!==undefined&&pred.bonus_off!==null&&pred.bonus_off!==''&&Number(pred.bonus_off)===Number(res.bonus_off))?'var(--green)':'var(--text3)'}">Bonus Offensif — Toi : ${pred.bonus_off!==undefined&&pred.bonus_off!==null&&pred.bonus_off!==''?pred.bonus_off:'–'} · Réel : ${res.bonus_off!==undefined&&res.bonus_off!==null?res.bonus_off:'–'}</div>` : '';
+    const isPoule = m.phase.startsWith('Poule');
+    const bdLine = (isPoule && res) ? `<div style="font-size:11px;color:${pred.bonus_def===res.bonus_def?'var(--green)':'var(--text3)'}">Bonus Défensif — Toi : ${ht[pred.bonus_def]||'–'} · Réel : ${ht[res.bonus_def]||'–'}</div>` : '';
+    const boLine = (isPoule && res) ? `<div style="font-size:11px;color:${(pred.bonus_off!==undefined&&pred.bonus_off!==null&&pred.bonus_off!==''&&Number(pred.bonus_off)===Number(res.bonus_off))?'var(--green)':'var(--text3)'}">Bonus Offensif — Toi : ${pred.bonus_off!==undefined&&pred.bonus_off!==null&&pred.bonus_off!==''?pred.bonus_off:'–'} · Réel : ${res.bonus_off!==undefined&&res.bonus_off!==null?res.bonus_off:'–'}</div>` : '';
     return `<div class="match-row${(pc?(' pool-'+m.phase.replace('Poule ','').trim().toLowerCase()):'')}" data-match-id="${m.id}" style="display:block;padding:12px 4px">
       ${gl}
       <div class="prono-team-row" style="display:grid;grid-template-columns:1fr auto 1fr;align-items:center;column-gap:12px">
@@ -1530,10 +1539,10 @@ function matchRow(m) {
       </div>
       ${teamCol(m.away,'right')}
     </div>
-    <div style="max-width:420px;margin:10px auto 0">
+    ${m.phase.startsWith('Poule') ? `<div style="max-width:420px;margin:10px auto 0">
       ${halftimeLeaderButtons(m)}
       ${triesInput(m)}
-    </div>
+    </div>` : ''}
     <div id="pst-${m.id}" style="text-align:center;margin-top:6px"><span class="countdown" data-deadline="${new Date(m.deadline).getTime()}" style="color:#24bdb5;font-weight:600"></span><br><span style="color:#24bdb5;font-size:13px">${new Date(m.deadline).toLocaleDateString('fr-FR',{day:'2-digit',month:'short'})} à ${new Date(m.deadline).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}</span></div>
   </div>`;
 }
@@ -1579,10 +1588,16 @@ function schedulePronoSave(matchId, field, val) {
   clearTimeout(saveTimers[matchId]);
   saveTimers[matchId] = setTimeout(async()=>{
     const p=myPronos[matchId];
-    const complete = p.pick && p.bonus_def && p.bonus_off !== undefined && p.bonus_off !== null && p.bonus_off !== '';
+    const match = ALL_MATCHES.find(x => String(x.id) === String(matchId));
+    const isPoule = match && match.phase.startsWith('Poule');
+    const complete = isPoule
+      ? (p.pick && p.bonus_def && p.bonus_off !== undefined && p.bonus_off !== null && p.bonus_off !== '')
+      : !!p.pick;
     const el=document.getElementById('pst-'+matchId);
     if (!complete) {
-      if (el) el.innerHTML='<span style="color:var(--text3);font-size:12px">Réponds aux 3 questions pour valider</span>';
+      if (el) el.innerHTML = isPoule
+        ? '<span style="color:var(--text3);font-size:12px">Réponds aux 3 questions pour valider</span>'
+        : '<span style="color:var(--text3);font-size:12px">Choisis 1, N ou 2 pour valider</span>';
       return;
     }
     await upsertProno(String(matchId), p);
@@ -1754,6 +1769,7 @@ async function renderAdminMatches() {
     html+=`<div class="group-header"${phc?` style="background:${phc};color:#fff;border-color:${phc}"`:''}>${ph}</div><div class="form-card" style="margin-bottom:8px">`;
     ms.forEach(m=>{
       const res=allResults[m.id]||{};
+      const isPoule = m.phase.startsWith('Poule');
       const htOpts = [['home', m.home], ['draw', 'Égalité'], ['away', m.away]];
       const htBtns = htOpts.map(([v,txt]) => {
         const active = res.bonus_def === v;
@@ -1765,7 +1781,7 @@ async function renderAdminMatches() {
         <div class="vs" style="font-size:16px">–</div>
         <input class="score-input" type="number" min="0" max="100" placeholder="–" id="res-${m.id}-a" value="${res.away!==undefined?res.away:''}">
         <div class="team-name right" style="font-size:14px">${m.away}${flagInline(m.away)}</div>
-        <div style="grid-column:1/-1;display:flex;gap:16px;align-items:center;font-size:12px;color:var(--text3);padding-top:4px;flex-wrap:wrap">
+        ${isPoule ? `<div style="grid-column:1/-1;display:flex;gap:16px;align-items:center;font-size:12px;color:var(--text3);padding-top:4px;flex-wrap:wrap">
           <div style="display:flex;align-items:center;gap:6px">
             <span>Bonus Offensif — Essais réels :</span>
             <input type="number" min="0" max="30" placeholder="–" id="res-${m.id}-boff" value="${res.bonus_off!==undefined&&res.bonus_off!==null?res.bonus_off:''}" style="width:52px;padding:3px 5px;font-size:12px;border-radius:5px;border:1px solid var(--border);background:var(--bg3);color:var(--text);text-align:center">
@@ -1774,7 +1790,7 @@ async function renderAdminMatches() {
             <span>Bonus Défensif — Menait à la MT :</span>
             <div style="display:flex;gap:4px;flex:1" id="res-${m.id}-bdef-wrap">${htBtns}</div>
           </div>
-        </div>
+        </div>` : ''}
       </div>`;
     });
     html+='</div>';
