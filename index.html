@@ -522,6 +522,7 @@ const ADMIN_PSEUDO = 'Admin CSE';
         <button onclick="adminTab(this,'admin-edit-group-deadlines')">Horaires poules</button>
         <button onclick="adminTab(this,'admin-edit-deadlines')">Horaires KO</button>
         <button onclick="adminTab(this,'admin-edit-visuel')">Visuel</button>
+        <button onclick="adminTab(this,'admin-edit-flags')">Drapeaux</button>
         <button onclick="adminTab(this,'admin-edit-regles')">Règles</button>
         <button onclick="adminTab(this,'admin-settings')">Danger</button>
       </div>
@@ -598,6 +599,12 @@ const ADMIN_PSEUDO = 'Admin CSE';
           </div>
         </div>
         <button class="btn btn-gold" onclick="saveVisuelConfig()">Enregistrer le visuel</button>
+      </div>
+
+      <!-- Édition drapeaux -->
+      <div id="admin-edit-flags" style="display:none">
+        <div class="info-box">Uploade une image par équipe (idéalement un rectangle, ex: 60×40px, format PNG/JPG/WebP, &lt;500 Ko). Elle remplace le drapeau partout dans l'appli dès l'upload — pas besoin d'un bouton "Enregistrer" séparé.</div>
+        <div id="admin-flags-list" class="form-card" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px"></div>
       </div>
 
       <!-- Édition règles -->
@@ -692,8 +699,16 @@ function _getFlag(team) {
   if (!team) return '';
   return TEAM_FLAGS[team] || _flagIndex[team.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')] || '';
 }
-function flag(team) { return ''; }
-function flagInline(team) { return ''; }
+let TEAM_FLAG_URLS = {};
+function flagImgTag(team, side) {
+  if (!team) return '';
+  const url = TEAM_FLAG_URLS[team];
+  if (!url) return '';
+  const margin = side === 'left' ? 'margin-right:6px' : 'margin-left:6px';
+  return `<img src="${url}" alt="" style="width:20px;height:14px;object-fit:cover;border-radius:2px;vertical-align:middle;${margin};box-shadow:0 0 0 1px rgba(0,0,0,0.12)">`;
+}
+function flag(team) { return flagImgTag(team, 'left'); }
+function flagInline(team) { return flagImgTag(team, 'right'); }
 
 // ── Coupe du Monde de Rugby 2027 (Australie) — 24 équipes, 6 poules de 4 ──
 let TEAMS = [
@@ -1103,6 +1118,7 @@ async function loadAppConfig() {
     if (data.ko_names) KO_NAMES = Object.assign(KO_NAMES, data.ko_names);
     if (data.ko_deadlines) KO_DEADLINES = Object.assign(KO_DEADLINES, data.ko_deadlines);
     if (data.group_deadlines) GROUP_DEADLINES = Object.assign(GROUP_DEADLINES, data.group_deadlines);
+    if (data.team_flags) TEAM_FLAG_URLS = Object.assign(TEAM_FLAG_URLS, data.team_flags);
     appConfig = Object.assign(appConfig, data.config || {});
   }
   ALL_MATCHES = buildMatches();
@@ -1688,13 +1704,14 @@ function adminLogin() {
 async function adminTab(btn,id) {
   document.querySelectorAll('#admin-sub-tabs button').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
-  ['admin-results','admin-special','admin-participants','admin-edit-ko','admin-edit-deadlines','admin-edit-group-deadlines','admin-edit-visuel','admin-edit-regles','admin-settings'].forEach(s=>document.getElementById(s).style.display='none');
+  ['admin-results','admin-special','admin-participants','admin-edit-ko','admin-edit-deadlines','admin-edit-group-deadlines','admin-edit-visuel','admin-edit-flags','admin-edit-regles','admin-settings'].forEach(s=>document.getElementById(s).style.display='none');
   document.getElementById(id).style.display='block';
   if (id==='admin-participants') await renderAdminParticipants();
   if (id==='admin-edit-ko') openAdminKo();
   if (id==='admin-edit-deadlines') openAdminDeadlines();
   if (id==='admin-edit-group-deadlines') openAdminGroupDeadlines();
   if (id==='admin-edit-visuel') openAdminVisuel();
+  if (id==='admin-edit-flags') renderAdminFlags();
   if (id==='admin-edit-regles') openAdminRegles();
 }
 async function renderAdminMatches() {
@@ -2028,6 +2045,53 @@ async function saveVisuelConfig() {
   applyConfig();
   await saveConfigToDb({ config: appConfig });
   showToast('Visuel mis à jour !');
+}
+
+// ── Admin : édition drapeaux ─────────────────────────────────────────────
+function renderAdminFlags() {
+  const list = document.getElementById('admin-flags-list');
+  list.innerHTML = [...TEAMS].sort((a,b)=>a.localeCompare(b,'fr')).map(team => {
+    const url = TEAM_FLAG_URLS[team];
+    const safeId = 'flagfile-' + team.replace(/[^a-z0-9]/gi,'_');
+    return `<div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:10px;display:flex;flex-direction:column;gap:8px;align-items:center">
+      <div style="width:100%;display:flex;align-items:center;gap:8px">
+        <div style="width:36px;height:24px;border-radius:3px;background:${url?'transparent':'var(--bg4)'};background-image:${url?`url('${url}')`:'none'};background-size:cover;background-position:center;flex-shrink:0;box-shadow:0 0 0 1px var(--border2)"></div>
+        <div style="font-size:14px;font-weight:600;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${team}</div>
+      </div>
+      <input type="file" accept="image/png,image/jpeg,image/webp" id="${safeId}" style="width:100%;font-size:12px" onchange="uploadTeamFlag('${team.replace(/'/g,"\\'")}', this)">
+      <div id="${safeId}-status" style="font-size:12px;color:var(--text3);min-height:16px"></div>
+      ${url ? `<button class="btn btn-outline btn-sm" style="width:100%;font-size:12px" onclick="removeTeamFlag('${team.replace(/'/g,"\\'")}')">Supprimer</button>` : ''}
+    </div>`;
+  }).join('');
+}
+async function uploadTeamFlag(team, inputEl) {
+  const file = inputEl.files && inputEl.files[0];
+  if (!file) return;
+  if (file.size > 500 * 1024) { showToast('Image trop lourde (max 500 Ko)', 'error'); return; }
+  const statusEl = document.getElementById(inputEl.id + '-status');
+  if (statusEl) statusEl.innerHTML = '<span class="spinner"></span>Upload...';
+  const ext = (file.name.split('.').pop() || 'png').toLowerCase();
+  const path = team.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]/gi,'_').toLowerCase() + '_' + Date.now() + '.' + ext;
+  try {
+    const { error: upErr } = await sb.storage.from('flags').upload(path, file, { upsert: true, cacheControl: '31536000' });
+    if (upErr) throw upErr;
+    const { data: pub } = sb.storage.from('flags').getPublicUrl(path);
+    TEAM_FLAG_URLS[team] = pub.publicUrl;
+    const ok = await saveConfigToDb({ team_flags: TEAM_FLAG_URLS });
+    if (!ok) throw new Error('Échec de sauvegarde en base');
+    showToast('Drapeau mis à jour pour ' + team + ' !');
+    renderAdminFlags();
+  } catch (e) {
+    console.error(e);
+    if (statusEl) statusEl.innerHTML = '';
+    showToast('Erreur upload : ' + (e.message || 'inconnue') + ' (bucket "flags" créé ?)', 'error');
+  }
+}
+async function removeTeamFlag(team) {
+  delete TEAM_FLAG_URLS[team];
+  await saveConfigToDb({ team_flags: TEAM_FLAG_URLS });
+  showToast('Drapeau supprimé pour ' + team);
+  renderAdminFlags();
 }
 
 // ── Admin : édition règles ─────────────────────────────────────────────────
