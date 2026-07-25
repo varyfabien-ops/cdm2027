@@ -1449,7 +1449,7 @@ function halftimeLeaderButtons(m) {
     return `<button onclick="schedulePronoSave(${m.id},'bonus_def','${v}')" style="flex:1;padding:6px 4px;font-size:12px;border-radius:5px;border:1px solid ${active?'var(--gold)':'var(--border)'};background:${active?'var(--gold)':'var(--bg3)'};color:${active?'#111':'var(--text3)'};cursor:pointer">${txt}</button>`;
   };
   return `<div style="margin-top:4px">
-    <div style="font-size:11px;color:var(--text3);margin-bottom:3px">Bonus Défensif — Qui mènera à la mi-temps ?</div>
+    <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:5px">Bonus Défensif — Qui mènera à la mi-temps ?</div>
     <div style="display:flex;gap:4px">${mkBtn('home', m.home)}${mkBtn('draw','Égalité')}${mkBtn('away', m.away)}</div>
   </div>`;
 }
@@ -1457,7 +1457,7 @@ function triesInput(m) {
   const pred = myPronos[m.id] || {};
   const val = pred.bonus_off !== undefined && pred.bonus_off !== null ? pred.bonus_off : '';
   return `<div style="margin-top:4px;display:flex;align-items:center;gap:6px">
-    <span style="font-size:11px;color:var(--text3);flex:1">Bonus Offensif — Nombre total d'essais dans le match</span>
+    <span style="font-size:14px;font-weight:600;color:var(--text);flex:1">Bonus Offensif — Nombre total d'essais dans le match</span>
     <input type="number" min="0" max="30" placeholder="–" value="${val}" oninput="schedulePronoSave(${m.id},'bonus_off',this.value)" style="width:56px;padding:4px 6px;font-size:13px;border-radius:5px;border:1px solid var(--border);background:var(--bg3);color:var(--text);text-align:center">
   </div>`;
 }
@@ -1472,10 +1472,10 @@ function matchRow(m) {
     <span style="${phaseLabelStyle}">${m.phase}</span>
     <span style="font-family:'Bebas Neue',sans-serif;font-size:0.85rem;letter-spacing:1px;color:var(--text3)">MATCH ${matchNum}</span>
   </div>`;
-  // Colonne équipe : largeur fixe symétrique gauche/droite, le nom peut passer sur 2 lignes
-  const teamCol = (team, side) => `<div style="display:flex;flex-direction:column;align-items:${side==='left'?'flex-end':'flex-start'};gap:4px;text-align:${side==='left'?'right':'left'}">
+  // Colonne équipe : drapeau + nom sur une seule ligne, alignée à l'extérieur
+  const teamCol = (team, side) => `<div style="display:flex;align-items:center;gap:6px;justify-content:${side==='left'?'flex-end':'flex-start'};white-space:nowrap">
     ${side==='right'?'':flag(team)}
-    <span style="font-size:14px;font-weight:700;text-transform:uppercase;line-height:1.15;letter-spacing:0.3px">${team}</span>
+    <span style="font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.3px">${team}</span>
     ${side==='right'?flagInline(team):''}
   </div>`;
   if (locked) {
