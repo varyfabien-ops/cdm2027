@@ -97,6 +97,8 @@ select.form-input{appearance:none;cursor:pointer}
 .match-row:hover{background:rgba(255,89,27,0.04)}
 .match-row.pool-a:hover{background:#f7ecfd}
 .match-row.pool-c:hover{background:#f7ecfd}
+.match-row.pool-d:hover{background:#e1fbfa}
+.match-row.pool-e:hover{background:#fff3e3}
 .match-row:last-child{border-bottom:none}
 .team-name{font-size:17px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
 .team-name.left{text-align:right}
@@ -741,7 +743,7 @@ const GROUP_START = {
   'D':'2027-10-04','E':'2027-10-05','F':'2027-10-06'
 };
 // Couleurs des poules alignées sur le site officiel rugbyworldcup.com/2027
-const POOL_COLORS = { A:'#b353f3', B:'#34D399', C:'#ff559c', D:'#24BDB5', E:'#FF591B', F:'#6366F1' };
+const POOL_COLORS = { A:'#b353f3', B:'#34D399', C:'#ff559c', D:'#01dfea', E:'#fe9901', F:'#6366F1' };
 function poolColor(phase) {
   if (!phase || !phase.startsWith('Poule ')) return null;
   return POOL_COLORS[phase.replace('Poule ', '').trim()] || null;
@@ -1464,9 +1466,9 @@ function halftimeLeaderButtons(m) {
 function triesInput(m) {
   const pred = myPronos[m.id] || {};
   const val = pred.bonus_off !== undefined && pred.bonus_off !== null ? pred.bonus_off : '';
-  return `<div style="margin-top:4px;display:flex;align-items:center;gap:6px">
-    <span style="font-size:14px;font-weight:600;color:var(--text);flex:1">Bonus Offensif — Nombre total d'essais dans le match</span>
-    <input type="number" min="0" max="30" placeholder="–" value="${val}" oninput="schedulePronoSave(${m.id},'bonus_off',this.value)" style="width:56px;padding:4px 6px;font-size:13px;border-radius:5px;border:1px solid var(--border);background:var(--bg3);color:var(--text);text-align:center">
+  return `<div style="margin-top:8px">
+    <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:5px">Bonus Offensif — Nombre total d'essais dans le match</div>
+    <input type="number" min="0" max="30" placeholder="–" value="${val}" oninput="schedulePronoSave(${m.id},'bonus_off',this.value)" style="width:100%;padding:6px 8px;font-size:14px;border-radius:5px;border:1px solid var(--border);background:var(--bg3);color:var(--text);text-align:center">
   </div>`;
 }
 function matchRow(m) {
