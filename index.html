@@ -51,7 +51,7 @@ body{font-family:'Aptos','Outfit',system-ui,sans-serif;background:var(--bg);colo
 .user-avatar{width:28px;height:28px;background:var(--gold);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0;letter-spacing:-0.5px}
 
 /* ── HERO ── */
-.hero{background:linear-gradient(135deg,#0e7a73 0%,#24bdb5 32%,#ff591b 68%,#fe4500 100%);padding:0;text-align:center;border-bottom:3px solid var(--yellow);position:relative;overflow:hidden;color:#fff}
+.hero{background:#fe4500;padding:0;text-align:center;border-bottom:3px solid var(--yellow);position:relative;overflow:hidden;color:#fff}
 .hero-confetti{position:absolute;inset:0;pointer-events:none;overflow:hidden}
 .hero-inner{position:relative;z-index:2;padding:1.5rem 1rem 1rem}
 .hero-logo{display:flex;justify-content:center;align-items:center;padding:1.5rem 0 0.5rem;position:relative;z-index:2}
@@ -63,7 +63,7 @@ body{font-family:'Aptos','Outfit',system-ui,sans-serif;background:var(--bg);colo
 .hero-stats{display:flex;justify-content:center;gap:0;margin-top:1.25rem;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,0.25);padding-top:1rem}
 .hero-stat{text-align:center;flex:1;min-width:80px;padding:0 1rem;border-right:1px solid rgba(255,255,255,0.25)}
 .hero-stat:last-child{border-right:none}
-.hero-stat strong{display:block;font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--yellow);line-height:1;text-shadow:0 0 16px rgba(0,0,0,0.2)}
+.hero-stat strong{display:block;font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#24bdb5;line-height:1;text-shadow:0 0 16px rgba(0,0,0,0.2)}
 .hero-stat span{font-size:12px;color:#fff;opacity:0.85;letter-spacing:1px;text-transform:uppercase}
 
 /* ── NAV ── */
@@ -432,8 +432,8 @@ const ADMIN_PSEUDO = 'Admin CSE';
       </table>
       <div style="padding:10px 14px;font-size:13px;color:var(--text3);border-top:1px solid var(--border)">
         + Sur chaque match, deux questions bonus supplémentaires, valant chacune <strong style="color:var(--gold)">1 point fixe</strong> quelle que soit la phase :<br>
-        🟢 <strong>BO</strong> : combien d'essais seront marqués au total dans le match ? (nombre exact requis)<br>
-        🔴 <strong>BD</strong> : quelle équipe mènera à la mi-temps ? (domicile / égalité / extérieur)
+        🟢 <strong>Bonus Offensif</strong> : combien d'essais seront marqués au total dans le match ? (nombre exact requis)<br>
+        🔴 <strong>Bonus Défensif</strong> : quelle équipe mènera à la mi-temps ? (domicile / égalité / extérieur)
       </div>
     </div>
 
@@ -783,7 +783,7 @@ let appConfig = {
     "ARTICLE 2 – CONDITIONS DE PARTICIPATION|Le concours est gratuit et ouvert à l'ensemble des salariés de l'entreprise. Chaque participant ne peut créer qu'un seul compte. En cas de comptes multiples détectés, seul le premier compte enregistré sera pris en compte. Les membres du CSE sont autorisés à participer.",
     "ARTICLE 3 – MODALITÉS DE PARTICIPATION|La participation s'effectue via l'application en ligne dont le lien est communiqué par le CSE. Les pronostics doivent être saisis avant le coup d'envoi de chaque match. Les pronostics peuvent être modifiés librement jusqu'à la clôture de chaque match.",
     "ARTICLE 4 – PRONOSTICS SPÉCIAUX|Trois pronostics spéciaux sont à saisir avant le début du tournoi (1er octobre 2027) : le vainqueur de la Coupe du Monde, les quatre demi-finalistes (top 4), et le nombre total de points marqués durant la compétition (52 matchs). Ces pronostics sont verrouillés dès le coup d'envoi du premier match.",
-    "ARTICLE 5 – SYSTÈME DE POINTS|Pour chaque match, le pronostic consiste à choisir le résultat (1 = victoire de l'équipe à domicile, N = match nul, 2 = victoire de l'équipe à l'extérieur), ainsi qu'à répondre à deux questions bonus : BO (le nombre total d'essais marqués dans le match) et BD (l'équipe qui mènera à la mi-temps).<table style='width:100%;border-collapse:collapse;margin:8px 0 12px;font-size:14px'><thead><tr style='border-bottom:1px solid rgba(254,69,0,0.3)'><th style='text-align:left;padding:6px 8px;color:var(--gold);font-family:Bebas Neue,sans-serif;letter-spacing:1px'>Phase</th><th style='text-align:center;padding:6px 8px;color:var(--gold);font-family:Bebas Neue,sans-serif;letter-spacing:1px'>Bon résultat (1/N/2)</th></tr></thead><tbody><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Phase de poules</td><td style='text-align:center;padding:5px 8px'>1 pt</td></tr><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Huitièmes de finale</td><td style='text-align:center;padding:5px 8px'>3 pts</td></tr><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Quarts de finale</td><td style='text-align:center;padding:5px 8px'>4 pts</td></tr><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Demi-finales</td><td style='text-align:center;padding:5px 8px'>5 pts</td></tr><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Petite finale</td><td style='text-align:center;padding:5px 8px'>6 pts</td></tr><tr><td style='padding:5px 8px'>Finale</td><td style='text-align:center;padding:5px 8px'>8 pts</td></tr></tbody></table><table style='width:100%;border-collapse:collapse;margin:0 0 12px;font-size:14px'><thead><tr style='border-bottom:1px solid rgba(254,69,0,0.3)'><th style='text-align:left;padding:6px 8px;color:var(--gold);font-family:Bebas Neue,sans-serif;letter-spacing:1px'>Bonus par match</th><th style='text-align:center;padding:6px 8px;color:var(--gold);font-family:Bebas Neue,sans-serif;letter-spacing:1px'>Points</th></tr></thead><tbody><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>BO — Nombre exact d'essais marqués dans le match</td><td style='text-align:center;padding:5px 8px'>1 pt fixe</td></tr><tr><td style='padding:5px 8px'>BD — Équipe qui mène à la mi-temps</td><td style='text-align:center;padding:5px 8px'>1 pt fixe</td></tr></tbody></table><table style='width:100%;border-collapse:collapse;margin:0 0 8px;font-size:14px'><thead><tr style='border-bottom:1px solid rgba(254,69,0,0.3)'><th style='text-align:left;padding:6px 8px;color:var(--gold);font-family:Bebas Neue,sans-serif;letter-spacing:1px'>Pronostic spécial</th><th style='text-align:center;padding:6px 8px;color:var(--gold);font-family:Bebas Neue,sans-serif;letter-spacing:1px'>Points</th></tr></thead><tbody><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Vainqueur du tournoi</td><td style='text-align:center;padding:5px 8px'>20 pts</td></tr><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Nombre exact de points marqués</td><td style='text-align:center;padding:5px 8px'>10 pts</td></tr><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Top 4 (par équipe correcte)</td><td style='text-align:center;padding:5px 8px'>5 pts</td></tr></tbody></table>Pour les phases finales, le résultat est celui à l'issue des 80 minutes réglementaires et des prolongations. Les coups de pied au but (tirs au but) ne sont pas pronostiqués.",
+    "ARTICLE 5 – SYSTÈME DE POINTS|Pour chaque match, le pronostic consiste à choisir le résultat (1 = victoire de l'équipe à domicile, N = match nul, 2 = victoire de l'équipe à l'extérieur), ainsi qu'à répondre à deux questions bonus : Bonus Offensif (le nombre total d'essais marqués dans le match) et Bonus Défensif (l'équipe qui mènera à la mi-temps).<table style='width:100%;border-collapse:collapse;margin:8px 0 12px;font-size:14px'><thead><tr style='border-bottom:1px solid rgba(254,69,0,0.3)'><th style='text-align:left;padding:6px 8px;color:var(--gold);font-family:Bebas Neue,sans-serif;letter-spacing:1px'>Phase</th><th style='text-align:center;padding:6px 8px;color:var(--gold);font-family:Bebas Neue,sans-serif;letter-spacing:1px'>Bon résultat (1/N/2)</th></tr></thead><tbody><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Phase de poules</td><td style='text-align:center;padding:5px 8px'>1 pt</td></tr><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Huitièmes de finale</td><td style='text-align:center;padding:5px 8px'>3 pts</td></tr><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Quarts de finale</td><td style='text-align:center;padding:5px 8px'>4 pts</td></tr><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Demi-finales</td><td style='text-align:center;padding:5px 8px'>5 pts</td></tr><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Petite finale</td><td style='text-align:center;padding:5px 8px'>6 pts</td></tr><tr><td style='padding:5px 8px'>Finale</td><td style='text-align:center;padding:5px 8px'>8 pts</td></tr></tbody></table><table style='width:100%;border-collapse:collapse;margin:0 0 12px;font-size:14px'><thead><tr style='border-bottom:1px solid rgba(254,69,0,0.3)'><th style='text-align:left;padding:6px 8px;color:var(--gold);font-family:Bebas Neue,sans-serif;letter-spacing:1px'>Bonus par match</th><th style='text-align:center;padding:6px 8px;color:var(--gold);font-family:Bebas Neue,sans-serif;letter-spacing:1px'>Points</th></tr></thead><tbody><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Bonus Offensif — Nombre exact d'essais marqués dans le match</td><td style='text-align:center;padding:5px 8px'>1 pt fixe</td></tr><tr><td style='padding:5px 8px'>Bonus Défensif — Équipe qui mène à la mi-temps</td><td style='text-align:center;padding:5px 8px'>1 pt fixe</td></tr></tbody></table><table style='width:100%;border-collapse:collapse;margin:0 0 8px;font-size:14px'><thead><tr style='border-bottom:1px solid rgba(254,69,0,0.3)'><th style='text-align:left;padding:6px 8px;color:var(--gold);font-family:Bebas Neue,sans-serif;letter-spacing:1px'>Pronostic spécial</th><th style='text-align:center;padding:6px 8px;color:var(--gold);font-family:Bebas Neue,sans-serif;letter-spacing:1px'>Points</th></tr></thead><tbody><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Vainqueur du tournoi</td><td style='text-align:center;padding:5px 8px'>20 pts</td></tr><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Nombre exact de points marqués</td><td style='text-align:center;padding:5px 8px'>10 pts</td></tr><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Top 4 (par équipe correcte)</td><td style='text-align:center;padding:5px 8px'>5 pts</td></tr></tbody></table>Pour les phases finales, le résultat est celui à l'issue des 80 minutes réglementaires et des prolongations. Les coups de pied au but (tirs au but) ne sont pas pronostiqués.",
     "ARTICLE 6 – CLASSEMENT|Le classement est établi en fonction du total de points cumulés. Il est évolutif pendant toute la durée du tournoi et définitif à l'issue de la validation de l'ensemble des résultats officiels. En cas d'égalité, le départage s'effectue par tirage au sort.",
     "ARTICLE 7 – DOTATIONS|Les dotations sont fournies par le CSE et attribuées aux 3 participants les mieux classés à l'issue du tournoi. La nature des lots sera communiquée séparément. Les lots ne peuvent faire l'objet d'aucune contrepartie financière et ne sont ni échangeables, ni remboursables.",
     "ARTICLE 8 – RESPONSABILITÉ|Le CSE se réserve le droit de modifier, reporter ou annuler le concours en cas de force majeure ou de circonstances exceptionnelles indépendantes de sa volonté. Aucune contestation ne pourra être formulée concernant : les résultats sportifs officiels, l'attribution des points, ou le classement final. Les décisions du CSE sont souveraines.",
@@ -1446,7 +1446,7 @@ function halftimeLeaderButtons(m) {
     return `<button onclick="schedulePronoSave(${m.id},'bonus_def','${v}')" style="flex:1;padding:6px 4px;font-size:12px;border-radius:5px;border:1px solid ${active?'var(--gold)':'var(--border)'};background:${active?'var(--gold)':'var(--bg3)'};color:${active?'#111':'var(--text3)'};cursor:pointer">${txt}</button>`;
   };
   return `<div style="margin-top:4px">
-    <div style="font-size:11px;color:var(--text3);margin-bottom:3px">BD — Qui mènera à la mi-temps ?</div>
+    <div style="font-size:11px;color:var(--text3);margin-bottom:3px">Bonus Défensif — Qui mènera à la mi-temps ?</div>
     <div style="display:flex;gap:4px">${mkBtn('home', m.home)}${mkBtn('draw','Égalité')}${mkBtn('away', m.away)}</div>
   </div>`;
 }
@@ -1454,7 +1454,7 @@ function triesInput(m) {
   const pred = myPronos[m.id] || {};
   const val = pred.bonus_off !== undefined && pred.bonus_off !== null ? pred.bonus_off : '';
   return `<div style="margin-top:4px;display:flex;align-items:center;gap:6px">
-    <span style="font-size:11px;color:var(--text3);flex:1">BO — Nombre total d'essais dans le match</span>
+    <span style="font-size:11px;color:var(--text3);flex:1">Bonus Offensif — Nombre total d'essais dans le match</span>
     <input type="number" min="0" max="30" placeholder="–" value="${val}" oninput="schedulePronoSave(${m.id},'bonus_off',this.value)" style="width:56px;padding:4px 6px;font-size:13px;border-radius:5px;border:1px solid var(--border);background:var(--bg3);color:var(--text);text-align:center">
   </div>`;
 }
@@ -1485,13 +1485,13 @@ function matchRow(m) {
     const resDisplay = res ? `<span style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--text2)">${res.home}-${res.away} (${real})</span>` : '<span class="locked-badge">Verrouillé</span>';
     const myPick = pred.pick ? `<span style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--gold)">Ton pronostic : ${pred.pick}</span>` : '<span style="color:var(--text3)">Pas de pronostic</span>';
     const ht = { home: m.home, draw: 'Égalité', away: m.away };
-    const bdLine = res ? `<div style="font-size:11px;color:${pred.bonus_def===res.bonus_def?'var(--green)':'var(--text3)'}">BD — Toi : ${ht[pred.bonus_def]||'–'} · Réel : ${ht[res.bonus_def]||'–'}</div>` : '';
-    const boLine = res ? `<div style="font-size:11px;color:${(pred.bonus_off!==undefined&&pred.bonus_off!==null&&pred.bonus_off!==''&&Number(pred.bonus_off)===Number(res.bonus_off))?'var(--green)':'var(--text3)'}">BO — Toi : ${pred.bonus_off!==undefined&&pred.bonus_off!==null&&pred.bonus_off!==''?pred.bonus_off:'–'} · Réel : ${res.bonus_off!==undefined&&res.bonus_off!==null?res.bonus_off:'–'}</div>` : '';
+    const bdLine = res ? `<div style="font-size:11px;color:${pred.bonus_def===res.bonus_def?'var(--green)':'var(--text3)'}">Bonus Défensif — Toi : ${ht[pred.bonus_def]||'–'} · Réel : ${ht[res.bonus_def]||'–'}</div>` : '';
+    const boLine = res ? `<div style="font-size:11px;color:${(pred.bonus_off!==undefined&&pred.bonus_off!==null&&pred.bonus_off!==''&&Number(pred.bonus_off)===Number(res.bonus_off))?'var(--green)':'var(--text3)'}">Bonus Offensif — Toi : ${pred.bonus_off!==undefined&&pred.bonus_off!==null&&pred.bonus_off!==''?pred.bonus_off:'–'} · Réel : ${res.bonus_off!==undefined&&res.bonus_off!==null?res.bonus_off:'–'}</div>` : '';
     return `<div class="match-row" data-match-id="${m.id}" style="padding-top:2px">
       ${gl}
       <div class="team-name left">${flag(m.home)}${m.home}</div>
       <div style="grid-column:2/4;text-align:center">${myPick}${bdLine}${boLine}</div>
-      <div class="team-name right">${m.away}</div>
+      <div class="team-name right">${m.away}${flagInline(m.away)}</div>
       <div class="match-date" style="display:flex;flex-direction:column;align-items:center;gap:2px">${resDisplay}${badge}<button onclick="showAllPronos(${m.id},'${(m.home+' vs '+m.away).replace(/'/g,"\\'")}')" style="margin-top:4px;font-size:11px;padding:3px 8px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;color:var(--text2);cursor:pointer">👥 Voir tous</button></div>
     </div>`;
   }
@@ -1507,7 +1507,7 @@ function matchRow(m) {
       ${halftimeLeaderButtons(m)}
       ${triesInput(m)}
     </div>
-    <div class="team-name right">${m.away}</div>
+    <div class="team-name right">${m.away}${flagInline(m.away)}</div>
     <div class="match-date" id="pst-${m.id}"><span class="countdown" data-deadline="${new Date(m.deadline).getTime()}"></span><br><span style="color:var(--text3);font-size:13px">${new Date(m.deadline).toLocaleDateString('fr-FR',{day:'2-digit',month:'short'})} à ${new Date(m.deadline).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}</span></div>
   </div>`;
 }
@@ -1733,14 +1733,14 @@ async function renderAdminMatches() {
         <input class="score-input" type="number" min="0" max="100" placeholder="–" id="res-${m.id}-h" value="${res.home!==undefined?res.home:''}">
         <div class="vs" style="font-size:16px">–</div>
         <input class="score-input" type="number" min="0" max="100" placeholder="–" id="res-${m.id}-a" value="${res.away!==undefined?res.away:''}">
-        <div class="team-name right" style="font-size:14px">${m.away}</div>
+        <div class="team-name right" style="font-size:14px">${m.away}${flagInline(m.away)}</div>
         <div style="grid-column:1/-1;display:flex;gap:16px;align-items:center;font-size:12px;color:var(--text3);padding-top:4px;flex-wrap:wrap">
           <div style="display:flex;align-items:center;gap:6px">
-            <span>BO — Essais réels :</span>
+            <span>Bonus Offensif — Essais réels :</span>
             <input type="number" min="0" max="30" placeholder="–" id="res-${m.id}-boff" value="${res.bonus_off!==undefined&&res.bonus_off!==null?res.bonus_off:''}" style="width:52px;padding:3px 5px;font-size:12px;border-radius:5px;border:1px solid var(--border);background:var(--bg3);color:var(--text);text-align:center">
           </div>
           <div style="display:flex;align-items:center;gap:6px;flex:1;min-width:200px">
-            <span>BD — Menait à la MT :</span>
+            <span>Bonus Défensif — Menait à la MT :</span>
             <div style="display:flex;gap:4px;flex:1" id="res-${m.id}-bdef-wrap">${htBtns}</div>
           </div>
         </div>
