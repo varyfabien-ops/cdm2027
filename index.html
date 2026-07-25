@@ -9,11 +9,11 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#1f2937;--bg2:#1f2937;--bg3:#374151;--bg4:#374151;
-  --gold:#FBBF24;--gold2:#FCD34D;--green:#22c55e;--red:#ef4444;--blue:#3b82f6;
+  --bg:#fff6f2;--bg2:#ffffff;--bg3:#fdeee7;--bg4:#fbe0d5;
+  --gold:#fe4500;--gold2:#ff591b;--green:#16a34a;--red:#dc2626;--blue:#24bdb5;--yellow:#f9e404;
   --maple:#e8472a;--clutch:#1a56db;--zayu:#16a34a;
-  --text:#FEFCE8;--text2:#d1d5db;--text3:#9ca3af;
-  --border:#1e2d45;--border2:#2a3d5a;
+  --text:#1f2937;--text2:#52525b;--text3:#8b8078;
+  --border:#f4d9cd;--border2:#e6b9a3;
 }
 body{font-family:'Aptos','Outfit',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
 
@@ -22,7 +22,7 @@ body{font-family:'Aptos','Outfit',system-ui,sans-serif;background:var(--bg);colo
 #auth-overlay.hidden{display:none}
 .auth-box{background:var(--bg2);border:2px solid var(--gold);border-radius:16px;padding:2rem;width:100%;max-width:380px;position:relative}
 .auth-logo{text-align:center;margin-bottom:1.5rem}
-.auth-logo .badge{display:inline-block;background:var(--gold);color:#374151;font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:2px;padding:4px 12px;border-radius:2px;margin-bottom:10px}
+.auth-logo .badge{display:inline-block;background:var(--gold);color:#fff;font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:2px;padding:4px 12px;border-radius:2px;margin-bottom:10px}
 .auth-logo h1{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:3px;line-height:1}
 .auth-logo h1 span{color:var(--gold)}
 .auth-logo p{font-size:14px;color:var(--text3);margin-top:4px}
@@ -36,8 +36,8 @@ body{font-family:'Aptos','Outfit',system-ui,sans-serif;background:var(--bg);colo
 .auth-input.error{border-color:var(--red)}
 .auth-error{font-size:14px;color:var(--red);margin-top:4px;display:none}
 .auth-error.show{display:block}
-.auth-btn{width:100%;padding:12px;background:var(--gold);color:#374151;border:none;border-radius:8px;font-family:'Aptos','Outfit',system-ui,sans-serif;font-size:16px;font-weight:700;cursor:pointer;transition:all .2s;margin-top:4px}
-.auth-btn:hover{background:#ffd700}
+.auth-btn{width:100%;padding:12px;background:var(--gold);color:#fff;border:none;border-radius:8px;font-family:'Aptos','Outfit',system-ui,sans-serif;font-size:16px;font-weight:700;cursor:pointer;transition:all .2s;margin-top:4px}
+.auth-btn:hover{background:var(--gold2)}
 .auth-btn:disabled{opacity:0.6;cursor:not-allowed}
 .auth-hint{font-size:14px;color:var(--text3);text-align:center;margin-top:14px;line-height:1.6}
 .pw-strength{height:3px;border-radius:2px;margin-top:5px;transition:all .3s;background:var(--border)}
@@ -46,25 +46,25 @@ body{font-family:'Aptos','Outfit',system-ui,sans-serif;background:var(--bg);colo
 .pw-strength.strong{background:var(--green);width:100%}
 
 /* ── USER PILL in nav ── */
-.user-pill{display:flex;align-items:center;gap:8px;padding:6px 14px;background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.25);border-radius:20px;font-size:15px;font-weight:500;color:var(--gold);cursor:pointer;transition:all .2s;white-space:nowrap;margin:auto 12px auto 0;box-shadow:0 0 12px rgba(251,191,36,0.1)}
-.user-pill:hover{background:rgba(245,200,66,0.18);box-shadow:0 0 18px rgba(245,200,66,0.2);transform:scale(1.03)}
-.user-avatar{width:28px;height:28px;background:var(--gold);color:#374151;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0;letter-spacing:-0.5px}
+.user-pill{display:flex;align-items:center;gap:8px;padding:6px 14px;background:rgba(254,69,0,0.08);border:1px solid rgba(254,69,0,0.25);border-radius:20px;font-size:15px;font-weight:500;color:var(--gold);cursor:pointer;transition:all .2s;white-space:nowrap;margin:auto 12px auto 0;box-shadow:0 0 12px rgba(254,69,0,0.1)}
+.user-pill:hover{background:rgba(255,89,27,0.18);box-shadow:0 0 18px rgba(255,89,27,0.2);transform:scale(1.03)}
+.user-avatar{width:28px;height:28px;background:var(--gold);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0;letter-spacing:-0.5px}
 
 /* ── HERO ── */
-.hero{background:linear-gradient(160deg,#07090f 0%,#0d1a30 40%,#071a12 100%);padding:0;text-align:center;border-bottom:2px solid rgba(251,191,36,0.25);position:relative;overflow:hidden}
+.hero{background:linear-gradient(135deg,#0e7a73 0%,#24bdb5 32%,#ff591b 68%,#fe4500 100%);padding:0;text-align:center;border-bottom:3px solid var(--yellow);position:relative;overflow:hidden;color:#fff}
 .hero-confetti{position:absolute;inset:0;pointer-events:none;overflow:hidden}
 .hero-inner{position:relative;z-index:2;padding:1.5rem 1rem 1rem}
 .hero-logo{display:flex;justify-content:center;align-items:center;padding:1.5rem 0 0.5rem;position:relative;z-index:2}
-.hero-badge{display:inline-block;background:linear-gradient(90deg,var(--gold),var(--gold2));color:#374151;font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:2px;padding:4px 14px;border-radius:20px;margin-bottom:10px;box-shadow:0 2px 10px rgba(251,191,36,0.4)}
-.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,7vw,4rem);letter-spacing:4px;line-height:1;text-shadow:0 2px 20px rgba(245,200,66,0.2)}
-.hero h1 span{color:var(--gold);text-shadow:0 0 30px rgba(251,191,36,0.5)}
-.hero p{color:var(--text2);font-size:15px;margin-top:6px;letter-spacing:0.5px}
+.hero-badge{display:inline-block;background:var(--yellow);color:#1f2937;font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:2px;padding:4px 14px;border-radius:20px;margin-bottom:10px;box-shadow:0 2px 10px rgba(0,0,0,0.15)}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,7vw,4rem);letter-spacing:4px;line-height:1;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,0.25)}
+.hero h1 span{color:var(--yellow);text-shadow:0 0 24px rgba(249,228,4,0.5)}
+.hero p{color:#fff;opacity:0.92;font-size:15px;margin-top:6px;letter-spacing:0.5px}
 
-.hero-stats{display:flex;justify-content:center;gap:0;margin-top:1.25rem;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,0.06);padding-top:1rem}
-.hero-stat{text-align:center;flex:1;min-width:80px;padding:0 1rem;border-right:1px solid rgba(255,255,255,0.06)}
+.hero-stats{display:flex;justify-content:center;gap:0;margin-top:1.25rem;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,0.25);padding-top:1rem}
+.hero-stat{text-align:center;flex:1;min-width:80px;padding:0 1rem;border-right:1px solid rgba(255,255,255,0.25)}
 .hero-stat:last-child{border-right:none}
-.hero-stat strong{display:block;font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--gold);line-height:1;text-shadow:0 0 20px rgba(251,191,36,0.25)}
-.hero-stat span{font-size:12px;color:var(--text3);letter-spacing:1px;text-transform:uppercase}
+.hero-stat strong{display:block;font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--yellow);line-height:1;text-shadow:0 0 16px rgba(0,0,0,0.2)}
+.hero-stat span{font-size:12px;color:#fff;opacity:0.85;letter-spacing:1px;text-transform:uppercase}
 
 /* ── NAV ── */
 nav{display:flex;align-items:center;background:var(--bg2);border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none;position:sticky;top:0;z-index:100;backdrop-filter:blur(10px);flex-wrap:nowrap}
@@ -72,7 +72,7 @@ nav{display:flex;align-items:center;background:var(--bg2);border-bottom:1px soli
 nav::-webkit-scrollbar{display:none}
 .tab-short{display:none}
 nav button.nav-tab{flex:1;min-width:80px;padding:14px 8px;background:none;border:none;border-bottom:2px solid transparent;color:var(--text2);font-family:'Aptos','Outfit',system-ui,sans-serif;font-size:15px;font-weight:500;cursor:pointer;transition:all .2s;white-space:nowrap}
-nav button.nav-tab.active{color:var(--gold);border-bottom-color:var(--gold);text-shadow:0 0 12px rgba(251,191,36,0.4)}
+nav button.nav-tab.active{color:var(--gold);border-bottom-color:var(--gold);text-shadow:0 0 12px rgba(254,69,0,0.4)}
 nav button.nav-tab:hover:not(.active){color:var(--text);background:var(--bg3)}
 
 /* ── PAGES ── */
@@ -81,7 +81,7 @@ nav button.nav-tab:hover:not(.active){color:var(--text);background:var(--bg3)}
 .page{display:none;padding:1.5rem;max-width:900px;margin:0 auto}
 .page.active{display:block;animation:fadeSlide .25s ease}
 @keyframes fadeSlide{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.section-title{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:2px;color:var(--gold);margin-bottom:1rem;display:flex;align-items:center;gap:8px;text-shadow:0 0 20px rgba(251,191,36,0.25)}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:2px;color:var(--gold);margin-bottom:1rem;display:flex;align-items:center;gap:8px;text-shadow:0 0 20px rgba(254,69,0,0.25)}
 .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)}
 
 /* ── FORM ELEMENTS ── */
@@ -94,7 +94,7 @@ select.form-input{appearance:none;cursor:pointer}
 
 /* ── MATCH ROWS ── */
 .match-row{display:grid;grid-template-columns:1fr 56px auto 56px 1fr;align-items:center;gap:6px;padding:10px 0;border-bottom:1px solid var(--border);transition:background .15s;border-radius:6px}
-.match-row:hover{background:rgba(245,200,66,0.04)}
+.match-row:hover{background:rgba(255,89,27,0.04)}
 .match-row:last-child{border-bottom:none}
 .team-name{font-size:17px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
 .team-name.left{text-align:right}
@@ -102,13 +102,13 @@ select.form-input{appearance:none;cursor:pointer}
 .match-date{font-size:15px;color:var(--text2);text-align:center;grid-column:1/-1;margin-top:6px}
 .score-input{width:100%;text-align:center;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px;color:var(--text);font-family:'Bebas Neue',sans-serif;font-size:1.4rem;outline:none;transition:border .2s;-moz-appearance:textfield;appearance:textfield}
 .score-input::-webkit-outer-spin-button,.score-input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
-.score-input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(251,191,36,0.15);transform:scale(1.05)}
+.score-input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(254,69,0,0.15);transform:scale(1.05)}
 .locked-badge{font-size:12px;background:rgba(239,68,68,0.15);color:var(--red);border:1px solid rgba(239,68,68,0.3);border-radius:4px;padding:2px 8px;display:inline-block}
 
 /* ── BUTTONS ── */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:12px 24px;border-radius:8px;border:none;font-family:'Aptos','Outfit',system-ui,sans-serif;font-size:16px;font-weight:600;cursor:pointer;transition:all .2s}
-.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#374151;box-shadow:0 4px 15px rgba(251,191,36,0.25)}
-.btn-gold:hover{background:linear-gradient(135deg,var(--gold2),var(--gold));transform:translateY(-1px);box-shadow:0 6px 20px rgba(251,191,36,0.35)}
+.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#fff;box-shadow:0 4px 15px rgba(254,69,0,0.25)}
+.btn-gold:hover{background:linear-gradient(135deg,var(--gold2),var(--gold));transform:translateY(-1px);box-shadow:0 6px 20px rgba(254,69,0,0.35)}
 .btn-outline{background:transparent;border:1px solid var(--border2);color:var(--text)}
 .btn-outline:hover{border-color:var(--gold);color:var(--gold)}
 .btn-sm{padding:6px 14px;font-size:14px}
@@ -123,7 +123,7 @@ select.form-input{appearance:none;cursor:pointer}
 .rank-row.header>div{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.25}
 .rank-row:not(.header):hover{background:var(--bg3)}
 .rank-num{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--text3);text-align:center}
-.rank-num.gold{color:var(--gold);text-shadow:0 0 12px rgba(251,191,36,0.5);font-size:1.4rem}
+.rank-num.gold{color:var(--gold);text-shadow:0 0 12px rgba(254,69,0,0.5);font-size:1.4rem}
 .rank-num.silver{color:#d4d4d4;text-shadow:0 0 8px rgba(212,212,212,0.4)}
 .rank-num.bronze{color:#e07830;text-shadow:0 0 8px rgba(224,120,48,0.4)}
 .rank-pseudo{font-weight:600;font-size:16px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -134,18 +134,18 @@ select.form-input{appearance:none;cursor:pointer}
 /* ── MISC ── */
 .points-legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-bottom:1.5rem}
 .legend-card{background:linear-gradient(135deg,var(--bg2),var(--bg3));border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center;transition:transform .2s}
-.legend-card:hover{transform:scale(1.04);border-color:rgba(251,191,36,0.25)}
+.legend-card:hover{transform:scale(1.04);border-color:rgba(254,69,0,0.25)}
 .legend-pts{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--gold)}
 .legend-label{font-size:13px;color:var(--text3);margin-top:2px}
 .tab-sub{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1rem;padding-bottom:0}
 .tab-sub button{background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:6px 12px;color:var(--text2);font-size:14px;cursor:pointer;white-space:nowrap;font-family:'Aptos','Outfit',system-ui,sans-serif;transition:all .2s}
-.tab-sub button.active{background:rgba(251,191,36,0.1);border-color:var(--gold);color:var(--gold)}
+.tab-sub button.active{background:rgba(254,69,0,0.1);border-color:var(--gold);color:var(--gold)}
 .group-header{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:8px 12px;margin-bottom:4px;font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:2px;color:var(--text2)}
-.info-box{background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.3);border-radius:8px;padding:12px 16px;font-size:15px;color:#93c5fd;margin-bottom:1rem;line-height:1.6}
-.warn-box{background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.25);border-radius:8px;padding:12px 16px;font-size:15px;color:#FCD34D;margin-bottom:1rem;line-height:1.6}
+.info-box{background:rgba(36,189,181,0.1);border:1px solid rgba(36,189,181,0.3);border-radius:8px;padding:12px 16px;font-size:15px;color:#0b6f68;margin-bottom:1rem;line-height:1.6}
+.warn-box{background:rgba(254,69,0,0.08);border:1px solid rgba(254,69,0,0.25);border-radius:8px;padding:12px 16px;font-size:15px;color:#b23600;margin-bottom:1rem;line-height:1.6}
 .my-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-bottom:1.5rem}
 .my-stat-card{background:linear-gradient(135deg,var(--bg2),var(--bg3));border:1px solid var(--gold);border-radius:12px;padding:14px;text-align:center;transition:transform .2s,border-color .2s}
-.my-stat-card:hover{transform:translateY(-2px);border-color:rgba(251,191,36,0.25)}
+.my-stat-card:hover{transform:translateY(-2px);border-color:rgba(254,69,0,0.25)}
 .my-stat-val{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--gold);line-height:1}
 .my-stat-label{font-size:13px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-top:4px}
 .config-warning{background:rgba(239,68,68,0.1);border:2px solid var(--red);border-radius:12px;padding:1.5rem;margin:1rem 0;text-align:center}
@@ -163,7 +163,7 @@ select.form-input{appearance:none;cursor:pointer}
 
 /* ── ACCOUNT PAGE ── */
 .account-header{display:flex;align-items:center;gap:16px;padding:1.5rem;background:var(--bg2);border:1px solid var(--border);border-radius:12px;margin-bottom:1.5rem}
-.account-avatar{width:56px;height:56px;background:var(--gold);color:#374151;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.6rem;flex-shrink:0}
+.account-avatar{width:56px;height:56px;background:var(--gold);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.6rem;flex-shrink:0}
 .account-name{font-size:1.1rem;font-weight:600}
 .account-sub{font-size:14px;color:var(--text3);margin-top:2px}
 
@@ -398,7 +398,7 @@ const ADMIN_PSEUDO = 'Admin CSE';
         La Coupe du Monde de Rugby 2027 se déroulera du <strong style="color:var(--text)">1er octobre au 13 novembre 2027</strong> en Australie.
       </p>
       <p style="font-size:15px;color:var(--text2);line-height:1.9;margin-top:10px">
-        Au programme : <strong style="color:var(--text)">24 équipes, 52 matchs</strong> et un seul trophée <svg width="16" height="16" viewBox="0 0 24 24" style="vertical-align:middle;margin-left:2px" fill="#FBBF24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+        Au programme : <strong style="color:var(--text)">24 équipes, 52 matchs</strong> et un seul trophée <svg width="16" height="16" viewBox="0 0 24 24" style="vertical-align:middle;margin-left:2px" fill="#fe4500"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
       </p>
       <p style="font-size:15px;color:var(--text2);line-height:1.9;margin-top:10px">
         Pronostique les résultats de chaque rencontre et tente de terminer en tête du classement !
@@ -585,16 +585,16 @@ const ADMIN_PSEUDO = 'Admin CSE';
           <p style="font-size:14px;color:var(--text3);margin-bottom:10px">Couleur principale utilisée partout dans l'interface</p>
           <div style="display:flex;align-items:center;gap:12px">
             <input type="color" id="admin-accent-color" style="width:48px;height:40px;border:none;background:none;cursor:pointer;border-radius:8px">
-            <input class="form-input" id="admin-accent-hex" type="text" placeholder="#FBBF24" style="flex:1;font-family:monospace" oninput="syncColorPicker()">
+            <input class="form-input" id="admin-accent-hex" type="text" placeholder="#fe4500" style="flex:1;font-family:monospace" oninput="syncColorPicker()">
             <div id="admin-color-preview" style="width:40px;height:40px;border-radius:8px;border:1px solid var(--border)"></div>
           </div>
           <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
-            <button class="btn btn-outline btn-sm" onclick="setPresetColor('#FBBF24')">🩵 Cyan</button>
+            <button class="btn btn-outline btn-sm" onclick="setPresetColor('#fe4500')">🟠 Orange</button>
+            <button class="btn btn-outline btn-sm" onclick="setPresetColor('#24bdb5')">🩵 Teal</button>
+            <button class="btn btn-outline btn-sm" onclick="setPresetColor('#f9e404')">🟡 Jaune</button>
             <button class="btn btn-outline btn-sm" onclick="setPresetColor('#22c55e')">🟢 Vert</button>
-            <button class="btn btn-outline btn-sm" onclick="setPresetColor('#3b82f6')">🔵 Bleu</button>
             <button class="btn btn-outline btn-sm" onclick="setPresetColor('#ef4444')">🔴 Rouge</button>
             <button class="btn btn-outline btn-sm" onclick="setPresetColor('#a855f7')">🟣 Violet</button>
-            <button class="btn btn-outline btn-sm" onclick="setPresetColor('#f97316')">🟠 Orange</button>
           </div>
         </div>
         <button class="btn btn-gold" onclick="saveVisuelConfig()">Enregistrer le visuel</button>
@@ -716,6 +716,12 @@ const GROUP_START = {
   'A':'2027-10-01','B':'2027-10-02','C':'2027-10-03',
   'D':'2027-10-04','E':'2027-10-05','F':'2027-10-06'
 };
+// Couleurs des poules alignées sur le site officiel rugbyworldcup.com/2027
+const POOL_COLORS = { A:'#8B5CF6', B:'#34D399', C:'#EC4899', D:'#24BDB5', E:'#FF591B', F:'#6366F1' };
+function poolColor(phase) {
+  if (!phase || !phase.startsWith('Poule ')) return null;
+  return POOL_COLORS[phase.replace('Poule ', '').trim()] || null;
+}
 const PHASE_MULT = {'Huitièmes':3,'Quarts':4,'Demi-finales':5,'Petite finale':6,'Finale':8};
 // ── Scoring 1/N/2 + bonus offensif/défensif ────────────────────────────────
 // Résultat réel du match sous forme '1' (victoire domicile) / 'N' (nul) / '2' (victoire extérieur)
@@ -756,13 +762,13 @@ let appConfig = {
   badgeText: 'CSE Astrea Monts — Concours Officiel',
   heroTitle: 'COUPE DU MONDE DE RUGBY 2027',
   heroSubtitle: 'Pronostics & Classement en temps réel — Australie',
-  accentColor: '#FBBF24',
+  accentColor: '#fe4500',
   rules: [
     "ARTICLE 1 – OBJET|Le CSE d'Astrea Monts organise un concours gratuit de pronostics sportifs à l'occasion de la Coupe du Monde de Rugby 2027. Ce concours a pour objectif de proposer une animation conviviale et fédératrice à destination des salariés, dans un cadre ludique et sans enjeu commercial.",
     "ARTICLE 2 – CONDITIONS DE PARTICIPATION|Le concours est gratuit et ouvert à l'ensemble des salariés de l'entreprise. Chaque participant ne peut créer qu'un seul compte. En cas de comptes multiples détectés, seul le premier compte enregistré sera pris en compte. Les membres du CSE sont autorisés à participer.",
     "ARTICLE 3 – MODALITÉS DE PARTICIPATION|La participation s'effectue via l'application en ligne dont le lien est communiqué par le CSE. Les pronostics doivent être saisis avant le coup d'envoi de chaque match. Les pronostics peuvent être modifiés librement jusqu'à la clôture de chaque match.",
     "ARTICLE 4 – PRONOSTICS SPÉCIAUX|Trois pronostics spéciaux sont à saisir avant le début du tournoi (1er octobre 2027) : le vainqueur de la Coupe du Monde, les quatre demi-finalistes (top 4), et le nombre total de points marqués durant la compétition (52 matchs). Ces pronostics sont verrouillés dès le coup d'envoi du premier match.",
-    "ARTICLE 5 – SYSTÈME DE POINTS|Pour chaque match, le pronostic consiste à choisir le résultat (1 = victoire de l'équipe à domicile, N = match nul, 2 = victoire de l'équipe à l'extérieur), ainsi qu'à répondre à deux questions bonus : BO (le nombre total d'essais marqués dans le match) et BD (l'équipe qui mènera à la mi-temps).<table style='width:100%;border-collapse:collapse;margin:8px 0 12px;font-size:14px'><thead><tr style='border-bottom:1px solid rgba(251,191,36,0.3)'><th style='text-align:left;padding:6px 8px;color:var(--gold);font-family:Bebas Neue,sans-serif;letter-spacing:1px'>Phase</th><th style='text-align:center;padding:6px 8px;color:var(--gold);font-family:Bebas Neue,sans-serif;letter-spacing:1px'>Bon résultat (1/N/2)</th></tr></thead><tbody><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Phase de poules</td><td style='text-align:center;padding:5px 8px'>1 pt</td></tr><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Huitièmes de finale</td><td style='text-align:center;padding:5px 8px'>3 pts</td></tr><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Quarts de finale</td><td style='text-align:center;padding:5px 8px'>4 pts</td></tr><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Demi-finales</td><td style='text-align:center;padding:5px 8px'>5 pts</td></tr><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Petite finale</td><td style='text-align:center;padding:5px 8px'>6 pts</td></tr><tr><td style='padding:5px 8px'>Finale</td><td style='text-align:center;padding:5px 8px'>8 pts</td></tr></tbody></table><table style='width:100%;border-collapse:collapse;margin:0 0 12px;font-size:14px'><thead><tr style='border-bottom:1px solid rgba(251,191,36,0.3)'><th style='text-align:left;padding:6px 8px;color:var(--gold);font-family:Bebas Neue,sans-serif;letter-spacing:1px'>Bonus par match</th><th style='text-align:center;padding:6px 8px;color:var(--gold);font-family:Bebas Neue,sans-serif;letter-spacing:1px'>Points</th></tr></thead><tbody><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>BO — Nombre exact d'essais marqués dans le match</td><td style='text-align:center;padding:5px 8px'>1 pt fixe</td></tr><tr><td style='padding:5px 8px'>BD — Équipe qui mène à la mi-temps</td><td style='text-align:center;padding:5px 8px'>1 pt fixe</td></tr></tbody></table><table style='width:100%;border-collapse:collapse;margin:0 0 8px;font-size:14px'><thead><tr style='border-bottom:1px solid rgba(251,191,36,0.3)'><th style='text-align:left;padding:6px 8px;color:var(--gold);font-family:Bebas Neue,sans-serif;letter-spacing:1px'>Pronostic spécial</th><th style='text-align:center;padding:6px 8px;color:var(--gold);font-family:Bebas Neue,sans-serif;letter-spacing:1px'>Points</th></tr></thead><tbody><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Vainqueur du tournoi</td><td style='text-align:center;padding:5px 8px'>20 pts</td></tr><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Nombre exact de points marqués</td><td style='text-align:center;padding:5px 8px'>10 pts</td></tr><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Top 4 (par équipe correcte)</td><td style='text-align:center;padding:5px 8px'>5 pts</td></tr></tbody></table>Pour les phases finales, le résultat est celui à l'issue des 80 minutes réglementaires et des prolongations. Les coups de pied au but (tirs au but) ne sont pas pronostiqués.",
+    "ARTICLE 5 – SYSTÈME DE POINTS|Pour chaque match, le pronostic consiste à choisir le résultat (1 = victoire de l'équipe à domicile, N = match nul, 2 = victoire de l'équipe à l'extérieur), ainsi qu'à répondre à deux questions bonus : BO (le nombre total d'essais marqués dans le match) et BD (l'équipe qui mènera à la mi-temps).<table style='width:100%;border-collapse:collapse;margin:8px 0 12px;font-size:14px'><thead><tr style='border-bottom:1px solid rgba(254,69,0,0.3)'><th style='text-align:left;padding:6px 8px;color:var(--gold);font-family:Bebas Neue,sans-serif;letter-spacing:1px'>Phase</th><th style='text-align:center;padding:6px 8px;color:var(--gold);font-family:Bebas Neue,sans-serif;letter-spacing:1px'>Bon résultat (1/N/2)</th></tr></thead><tbody><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Phase de poules</td><td style='text-align:center;padding:5px 8px'>1 pt</td></tr><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Huitièmes de finale</td><td style='text-align:center;padding:5px 8px'>3 pts</td></tr><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Quarts de finale</td><td style='text-align:center;padding:5px 8px'>4 pts</td></tr><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Demi-finales</td><td style='text-align:center;padding:5px 8px'>5 pts</td></tr><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Petite finale</td><td style='text-align:center;padding:5px 8px'>6 pts</td></tr><tr><td style='padding:5px 8px'>Finale</td><td style='text-align:center;padding:5px 8px'>8 pts</td></tr></tbody></table><table style='width:100%;border-collapse:collapse;margin:0 0 12px;font-size:14px'><thead><tr style='border-bottom:1px solid rgba(254,69,0,0.3)'><th style='text-align:left;padding:6px 8px;color:var(--gold);font-family:Bebas Neue,sans-serif;letter-spacing:1px'>Bonus par match</th><th style='text-align:center;padding:6px 8px;color:var(--gold);font-family:Bebas Neue,sans-serif;letter-spacing:1px'>Points</th></tr></thead><tbody><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>BO — Nombre exact d'essais marqués dans le match</td><td style='text-align:center;padding:5px 8px'>1 pt fixe</td></tr><tr><td style='padding:5px 8px'>BD — Équipe qui mène à la mi-temps</td><td style='text-align:center;padding:5px 8px'>1 pt fixe</td></tr></tbody></table><table style='width:100%;border-collapse:collapse;margin:0 0 8px;font-size:14px'><thead><tr style='border-bottom:1px solid rgba(254,69,0,0.3)'><th style='text-align:left;padding:6px 8px;color:var(--gold);font-family:Bebas Neue,sans-serif;letter-spacing:1px'>Pronostic spécial</th><th style='text-align:center;padding:6px 8px;color:var(--gold);font-family:Bebas Neue,sans-serif;letter-spacing:1px'>Points</th></tr></thead><tbody><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Vainqueur du tournoi</td><td style='text-align:center;padding:5px 8px'>20 pts</td></tr><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Nombre exact de points marqués</td><td style='text-align:center;padding:5px 8px'>10 pts</td></tr><tr style='border-bottom:1px solid var(--border)'><td style='padding:5px 8px'>Top 4 (par équipe correcte)</td><td style='text-align:center;padding:5px 8px'>5 pts</td></tr></tbody></table>Pour les phases finales, le résultat est celui à l'issue des 80 minutes réglementaires et des prolongations. Les coups de pied au but (tirs au but) ne sont pas pronostiqués.",
     "ARTICLE 6 – CLASSEMENT|Le classement est établi en fonction du total de points cumulés. Il est évolutif pendant toute la durée du tournoi et définitif à l'issue de la validation de l'ensemble des résultats officiels. En cas d'égalité, le départage s'effectue par tirage au sort.",
     "ARTICLE 7 – DOTATIONS|Les dotations sont fournies par le CSE et attribuées aux 3 participants les mieux classés à l'issue du tournoi. La nature des lots sera communiquée séparément. Les lots ne peuvent faire l'objet d'aucune contrepartie financière et ne sont ni échangeables, ni remboursables.",
     "ARTICLE 8 – RESPONSABILITÉ|Le CSE se réserve le droit de modifier, reporter ou annuler le concours en cas de force majeure ou de circonstances exceptionnelles indépendantes de sa volonté. Aucune contestation ne pourra être formulée concernant : les résultats sportifs officiels, l'attribution des points, ou le classement final. Les décisions du CSE sont souveraines.",
@@ -1439,8 +1445,12 @@ function triesInput(m) {
 function matchRow(m) {
   const locked=isLocked(m), pred=myPronos[m.id]||{};
   const matchNum = getMatchNumber(m);
+  const pc = poolColor(m.phase);
+  const phaseLabelStyle = pc
+    ? `font-family:'Bebas Neue',sans-serif;font-size:0.8rem;letter-spacing:1.5px;color:#fff;background:${pc};padding:2px 10px;border-radius:20px`
+    : `font-family:'Bebas Neue',sans-serif;font-size:0.85rem;letter-spacing:2px;color:var(--gold);opacity:0.8`;
   const gl = `<div style="grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;padding-top:4px;padding-bottom:2px">
-    <span style="font-family:'Bebas Neue',sans-serif;font-size:0.85rem;letter-spacing:2px;color:var(--gold);opacity:0.8">${m.phase.startsWith('Poule') ? m.phase : m.phase}</span>
+    <span style="${phaseLabelStyle}">${m.phase}</span>
     <span style="font-family:'Bebas Neue',sans-serif;font-size:0.85rem;letter-spacing:1px;color:var(--text3)">MATCH ${matchNum}</span>
   </div>`;
   if (locked) {
@@ -1508,7 +1518,7 @@ function renderPronoContent(tab) {
   let html = '';
   Object.entries(byDay).forEach(([day, matches]) => {
     const dayLabel = day.charAt(0).toUpperCase() + day.slice(1);
-    html += `<div style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:2px;color:var(--gold);padding:10px 0 6px;margin-top:8px;border-bottom:1px solid rgba(251,191,36,0.2);margin-bottom:8px">📅 ${dayLabel}</div>`;
+    html += `<div style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:2px;color:var(--gold);padding:10px 0 6px;margin-top:8px;border-bottom:1px solid rgba(254,69,0,0.2);margin-bottom:8px">📅 ${dayLabel}</div>`;
     html += '<div class="form-card" style="margin-bottom:12px">';
     matches.forEach((m, idx) => {
       if (idx > 0) html += matchSeparator();
@@ -1656,7 +1666,7 @@ async function loadRanking() {
     const medals=['🥇','🥈','🥉'];
     const cls = i===0?'gold':i===1?'silver':i===2?'bronze':'';
     const isMe = r.pseudo===currentPseudo;
-    html+=`<div class="rank-row" style="${isMe?'background:rgba(251,191,36,0.07)':''}">
+    html+=`<div class="rank-row" style="${isMe?'background:rgba(254,69,0,0.07)':''}">
       <div class="rank-num ${cls}">${medals[i]||('#'+(i+1))}</div>
       <div class="rank-pseudo">${r.pseudo}${isMe?' <span style="font-size:13px;color:var(--gold)">(moi)</span>':''}</div>
       <div class="rank-pts">${r.points}</div>
@@ -1692,7 +1702,8 @@ async function renderAdminMatches() {
   let html='';
   phases.forEach(ph=>{
     const ms=ALL_MATCHES.filter(m=>m.phase===ph).sort((a,b)=>a.deadline-b.deadline); if (!ms.length) return;
-    html+=`<div class="group-header">${ph}</div><div class="form-card" style="margin-bottom:8px">`;
+    const phc = poolColor(ph);
+    html+=`<div class="group-header"${phc?` style="background:${phc};color:#fff;border-color:${phc}"`:''}>${ph}</div><div class="form-card" style="margin-bottom:8px">`;
     ms.forEach(m=>{
       const res=allResults[m.id]||{};
       const htOpts = [['home', m.home], ['draw', 'Égalité'], ['away', m.away]];
@@ -1986,7 +1997,7 @@ function openAdminVisuel() {
   document.getElementById('admin-badge-txt').value = appConfig.badgeText || '';
   document.getElementById('admin-hero-title').value = appConfig.heroTitle || '';
   document.getElementById('admin-hero-sub').value = appConfig.heroSubtitle || '';
-  const color = appConfig.accentColor || '#FBBF24';
+  const color = appConfig.accentColor || '#fe4500';
   document.getElementById('admin-accent-color').value = color;
   document.getElementById('admin-accent-hex').value = color;
   document.getElementById('admin-color-preview').style.background = color;
@@ -2375,7 +2386,7 @@ async function loadEvolutionChart() {
 
   // Pseudos à afficher : joueur courant + compareList (max 5)
   const toShow = [currentPseudo, ...compareList.slice(0,5)].filter(Boolean);
-  const colors = ['#FBBF24','#3b82f6','#22c55e','#ef4444','#a855f7','#f97316'];
+  const colors = ['#fe4500','#24bdb5','#22c55e','#ef4444','#a855f7','#f97316'];
 
   // Datasets
   const datasets = toShow.map((pseudo, idx) => {
@@ -2660,7 +2671,7 @@ function buildMatchGridSVG(matches) {
   const rows = Math.ceil(matches.length / cols);
   const w = cols * (size + gap) - gap;
   const h = rows * (size + gap) - gap;
-  const colorFor = s => s === 'exact' ? '#16a34a' : s === 'bon' ? '#FBBF24' : s === 'faux' ? '#ef4444' : '#e2e5ea';
+  const colorFor = s => s === 'exact' ? '#16a34a' : s === 'bon' ? '#fe4500' : s === 'faux' ? '#ef4444' : '#e2e5ea';
   const rects = matches.map((m, i) => {
     const col = i % cols, row = Math.floor(i / cols);
     const x = col * (size + gap), y = row * (size + gap);
@@ -2681,13 +2692,13 @@ function buildDiplomaHTML(fullName, position, total, points, exact, longestStrea
     ${mascotRightSrc ? `<img src="${mascotRightSrc}" style="position:absolute;right:-6px;bottom:-6px;width:260px;height:auto;opacity:0.95;pointer-events:none">` : ''}
     <div style="text-align:center;position:relative;width:100%">
       ${logoSrc ? `<img src="${logoSrc}" style="width:70px;height:auto;margin:0 auto 4px;display:block">` : ''}
-      <div style="display:inline-block;padding:7px 20px;background:#FBBF24;color:#374151;border-radius:10px;font-family:'Aptos','Outfit',system-ui,sans-serif;font-weight:700;font-size:13px;letter-spacing:1px">CSE ASTREA MONTS — CONCOURS DE PRONOSTICS</div>
+      <div style="display:inline-block;padding:7px 20px;background:#fe4500;color:#fff;border-radius:10px;font-family:'Aptos','Outfit',system-ui,sans-serif;font-weight:700;font-size:13px;letter-spacing:1px">CSE ASTREA MONTS — CONCOURS DE PRONOSTICS</div>
       <div style="font-family:'Bebas Neue',sans-serif;font-size:40px;letter-spacing:1px;margin-top:6px;color:#1f2937">DIPLÔME DE PARTICIPATION</div>
       <div style="font-size:14px;margin-top:2px;color:#5b6472">COUPE DU MONDE DE RUGBY 2027 — AUSTRALIE</div>
     </div>
     <div style="text-align:center;margin-top:16px;position:relative;width:100%">
       <div style="font-size:14px;color:#5b6472;letter-spacing:1px;margin-bottom:6px">Décerné à</div>
-      <div style="display:inline-block;padding:7px 20px;background:#374151;color:#FBBF24;border-radius:10px;font-family:'Bebas Neue','Outfit',system-ui,sans-serif;font-weight:700;font-size:40px;letter-spacing:1px;margin-bottom:6px">${fullName}</div>
+      <div style="display:inline-block;padding:7px 20px;background:#374151;color:#fe4500;border-radius:10px;font-family:'Bebas Neue','Outfit',system-ui,sans-serif;font-weight:700;font-size:40px;letter-spacing:1px;margin-bottom:6px">${fullName}</div>
       <div style="font-size:18px">${medal} CLASSEMENT FINAL : <strong>#${position}</strong> sur ${total} participants</div>
       <div style="font-size:15px;margin-top:6px;color:#1f2937"><strong>${points}</strong> Points · <strong>${longestStreak}</strong> Bons Résultats Consécutifs</div>
       <div style="font-size:14px;margin-top:6px;color:#5b6472">${groupLine}</div>
@@ -2704,7 +2715,7 @@ function buildDiplomaHTML(fullName, position, total, points, exact, longestStrea
         ${buildMatchGridSVG(matches || [])}
         <div style="display:flex;gap:12px;justify-content:center;margin-top:7px;font-size:8px;color:#5b6472">
           <span><span style="display:inline-block;width:8px;height:8px;background:#16a34a;border-radius:2px;margin-right:3px;vertical-align:-1px"></span>PLEINE LUCARNE</span>
-          <span><span style="display:inline-block;width:8px;height:8px;background:#FBBF24;border-radius:2px;margin-right:3px;vertical-align:-1px"></span>LE FAMEUX BUT A LA 90'+5'</span>
+          <span><span style="display:inline-block;width:8px;height:8px;background:#fe4500;border-radius:2px;margin-right:3px;vertical-align:-1px"></span>LE FAMEUX BUT A LA 90'+5'</span>
           <span><span style="display:inline-block;width:8px;height:8px;background:#ef4444;border-radius:2px;margin-right:3px;vertical-align:-1px"></span>LA FAUTE DE L'ARBITRE</span>
           <span><span style="display:inline-block;width:8px;height:8px;background:#e2e5ea;border-radius:2px;margin-right:3px;vertical-align:-1px"></span>SUR LE BANC ?</span>
         </div>
@@ -3574,7 +3585,7 @@ async function togglePublicMosaic(pseudo, rid) {
         el.innerHTML = `<div style="display:flex;justify-content:center">${buildMatchGridSVG(matches)}</div>
           <div style="display:flex;gap:12px;justify-content:center;margin-top:8px;font-size:11px;color:var(--text2)">
             <span><span style="display:inline-block;width:9px;height:9px;background:#16a34a;border-radius:2px;margin-right:3px"></span>PLEINE LUCARNE</span>
-            <span><span style="display:inline-block;width:9px;height:9px;background:#FBBF24;border-radius:2px;margin-right:3px"></span>LE FAMEUX BUT A LA 90'+5'</span>
+            <span><span style="display:inline-block;width:9px;height:9px;background:#fe4500;border-radius:2px;margin-right:3px"></span>LE FAMEUX BUT A LA 90'+5'</span>
             <span><span style="display:inline-block;width:9px;height:9px;background:#ef4444;border-radius:2px;margin-right:3px"></span>LA FAUTE DE L'ARBITRE</span>
             <span><span style="display:inline-block;width:9px;height:9px;background:#e2e5ea;border-radius:2px;margin-right:3px"></span>SUR LE BANC ?</span>
           </div>`;
@@ -3596,7 +3607,7 @@ async function togglePublicEvolution(pseudo, eid) {
       el.innerHTML = '<p style="font-size:13px;color:var(--text2)">Chargement…</p>';
       try {
         const evolution = await getPlayerEvolution(pseudo);
-        el.innerHTML = `<div style="display:flex;justify-content:center;background:var(--bg3);border-radius:8px;padding:8px">${buildEvolutionSVG(evolution, 480, 130, '#FBBF24')}</div>`;
+        el.innerHTML = `<div style="display:flex;justify-content:center;background:var(--bg3);border-radius:8px;padding:8px">${buildEvolutionSVG(evolution, 480, 130, '#fe4500')}</div>`;
         el.dataset.loaded = '1';
       } catch (e) {
         el.innerHTML = '<p style="font-size:13px;color:var(--red)">Erreur de chargement de la courbe.</p>';
