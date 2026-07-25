@@ -51,7 +51,7 @@ body{font-family:'Aptos','Outfit',system-ui,sans-serif;background:var(--bg);colo
 .user-avatar{width:28px;height:28px;background:var(--gold);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0;letter-spacing:-0.5px}
 
 /* ── HERO ── */
-.hero{background:#fe4500;padding:0;text-align:center;border-bottom:3px solid var(--yellow);position:relative;overflow:hidden;color:#fff}
+.hero{background:#24bdb5;padding:0;text-align:center;border-bottom:3px solid var(--yellow);position:relative;overflow:hidden;color:#fff}
 .hero-confetti{position:absolute;inset:0;pointer-events:none;overflow:hidden}
 .hero-inner{position:relative;z-index:2;padding:1.5rem 1rem 1rem}
 .hero-logo{display:flex;justify-content:center;align-items:center;padding:1.5rem 0 0.5rem;position:relative;z-index:2}
@@ -63,7 +63,7 @@ body{font-family:'Aptos','Outfit',system-ui,sans-serif;background:var(--bg);colo
 .hero-stats{display:flex;justify-content:center;gap:0;margin-top:1.25rem;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,0.25);padding-top:1rem}
 .hero-stat{text-align:center;flex:1;min-width:80px;padding:0 1rem;border-right:1px solid rgba(255,255,255,0.25)}
 .hero-stat:last-child{border-right:none}
-.hero-stat strong{display:block;font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#24bdb5;line-height:1;text-shadow:0 0 16px rgba(0,0,0,0.2)}
+.hero-stat strong{display:block;font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--yellow);line-height:1;text-shadow:0 0 16px rgba(0,0,0,0.2)}
 .hero-stat span{font-size:12px;color:#fff;opacity:0.85;letter-spacing:1px;text-transform:uppercase}
 
 /* ── NAV ── */
@@ -1279,7 +1279,7 @@ function renderNextMatch() {
   const now = new Date();
   // Trouver le prochain match non verrouillé sans pronostic
   const next = ALL_MATCHES
-    .filter(m => !isLocked(m) && (!myPronos[m.id] || !myPronos[m.id].pick))
+    .filter(m => !isLocked(m) && !(myPronos[m.id] && myPronos[m.id].pick && myPronos[m.id].bonus_def && myPronos[m.id].bonus_off !== undefined && myPronos[m.id].bonus_off !== null && myPronos[m.id].bonus_off !== ''))
     .sort((a,b) => a.deadline - b.deadline)[0];
   if (!next) {
     el.innerHTML = '<span style="color:var(--green)">✓ Tous tes pronostics sont à jour !</span>';
@@ -1465,15 +1465,15 @@ function matchRow(m) {
   const phaseLabelStyle = pc
     ? `font-family:'Bebas Neue',sans-serif;font-size:0.8rem;letter-spacing:1.5px;color:#fff;background:${pc};padding:2px 10px;border-radius:20px`
     : `font-family:'Bebas Neue',sans-serif;font-size:0.85rem;letter-spacing:2px;color:var(--gold);opacity:0.8`;
-  const gl = `<div style="grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;padding-top:4px;padding-bottom:2px">
+  const gl = `<div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:6px">
     <span style="${phaseLabelStyle}">${m.phase}</span>
     <span style="font-family:'Bebas Neue',sans-serif;font-size:0.85rem;letter-spacing:1px;color:var(--text3)">MATCH ${matchNum}</span>
   </div>`;
+  const teamSpan = (team, side) => `<span style="display:inline-flex;align-items:center;gap:6px;font-size:15px;font-weight:700;text-transform:uppercase;white-space:nowrap;letter-spacing:0.3px">${side==='left'?flag(team):''}${team}${side==='right'?flagInline(team):''}</span>`;
   if (locked) {
     const res = allResults[m.id];
     let badge = '';
     if (res && pred.pick) {
-      const mult = PHASE_MULT[m.phase] || 1;
       const pts = matchPoints(pred, res, m.phase);
       if (isPickCorrect(pred, res)) {
         badge = `<span style="color:var(--green);font-size:12px;font-weight:600">✓ Bon résultat — ${pts} pt${pts>1?'s':''}</span>`;
@@ -1483,32 +1483,37 @@ function matchRow(m) {
     }
     const real = res ? actualPick(res) : null;
     const resDisplay = res ? `<span style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--text2)">${res.home}-${res.away} (${real})</span>` : '<span class="locked-badge">Verrouillé</span>';
-    const myPick = pred.pick ? `<span style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--gold)">Ton pronostic : ${pred.pick}</span>` : '<span style="color:var(--text3)">Pas de pronostic</span>';
+    const myPick = pred.pick ? `<span style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--gold)">${pred.pick}</span>` : '<span style="color:var(--text3);font-size:13px">Pas de pronostic</span>';
     const ht = { home: m.home, draw: 'Égalité', away: m.away };
     const bdLine = res ? `<div style="font-size:11px;color:${pred.bonus_def===res.bonus_def?'var(--green)':'var(--text3)'}">Bonus Défensif — Toi : ${ht[pred.bonus_def]||'–'} · Réel : ${ht[res.bonus_def]||'–'}</div>` : '';
     const boLine = res ? `<div style="font-size:11px;color:${(pred.bonus_off!==undefined&&pred.bonus_off!==null&&pred.bonus_off!==''&&Number(pred.bonus_off)===Number(res.bonus_off))?'var(--green)':'var(--text3)'}">Bonus Offensif — Toi : ${pred.bonus_off!==undefined&&pred.bonus_off!==null&&pred.bonus_off!==''?pred.bonus_off:'–'} · Réel : ${res.bonus_off!==undefined&&res.bonus_off!==null?res.bonus_off:'–'}</div>` : '';
-    return `<div class="match-row" data-match-id="${m.id}" style="padding-top:2px">
+    return `<div class="match-row" data-match-id="${m.id}" style="display:block;padding:12px 4px">
       ${gl}
-      <div class="team-name left">${flag(m.home)}${m.home}</div>
-      <div style="grid-column:2/4;text-align:center">${myPick}${bdLine}${boLine}</div>
-      <div class="team-name right">${m.away}${flagInline(m.away)}</div>
-      <div class="match-date" style="display:flex;flex-direction:column;align-items:center;gap:2px">${resDisplay}${badge}<button onclick="showAllPronos(${m.id},'${(m.home+' vs '+m.away).replace(/'/g,"\\'")}')" style="margin-top:4px;font-size:11px;padding:3px 8px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;color:var(--text2);cursor:pointer">👥 Voir tous</button></div>
+      <div style="display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap">
+        ${teamSpan(m.home,'left')}
+        ${myPick}
+        ${teamSpan(m.away,'right')}
+      </div>
+      <div style="text-align:center;margin-top:4px">${bdLine}${boLine}</div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:2px;margin-top:6px">${resDisplay}${badge}<button onclick="showAllPronos(${m.id},'${(m.home+' vs '+m.away).replace(/'/g,"\\'")}')" style="margin-top:4px;font-size:11px;padding:3px 8px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;color:var(--text2);cursor:pointer">👥 Voir tous</button></div>
     </div>`;
   }
-  return `<div class="match-row" data-match-id="${m.id}" style="padding-top:2px">
+  return `<div class="match-row" data-match-id="${m.id}" style="display:block;padding:12px 4px">
     ${gl}
-    <div class="team-name left">${flag(m.home)}${m.home}</div>
-    <div style="grid-column:2/4;display:flex;flex-direction:column;gap:6px">
+    <div style="display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap">
+      ${teamSpan(m.home,'left')}
       <div style="display:flex;gap:6px">
         ${pick1n2Button(m,'1','1')}
         ${pick1n2Button(m,'N','N')}
         ${pick1n2Button(m,'2','2')}
       </div>
+      ${teamSpan(m.away,'right')}
+    </div>
+    <div style="max-width:420px;margin:8px auto 0">
       ${halftimeLeaderButtons(m)}
       ${triesInput(m)}
     </div>
-    <div class="team-name right">${m.away}${flagInline(m.away)}</div>
-    <div class="match-date" id="pst-${m.id}"><span class="countdown" data-deadline="${new Date(m.deadline).getTime()}"></span><br><span style="color:var(--text3);font-size:13px">${new Date(m.deadline).toLocaleDateString('fr-FR',{day:'2-digit',month:'short'})} à ${new Date(m.deadline).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}</span></div>
+    <div id="pst-${m.id}" style="text-align:center;margin-top:6px"><span class="countdown" data-deadline="${new Date(m.deadline).getTime()}" style="color:#24bdb5;font-weight:600"></span><br><span style="color:#24bdb5;font-size:13px">${new Date(m.deadline).toLocaleDateString('fr-FR',{day:'2-digit',month:'short'})} à ${new Date(m.deadline).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}</span></div>
   </div>`;
 }
 
@@ -1534,7 +1539,7 @@ function renderPronoContent(tab) {
   let html = '';
   Object.entries(byDay).forEach(([day, matches]) => {
     const dayLabel = day.charAt(0).toUpperCase() + day.slice(1);
-    html += `<div style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:2px;color:var(--gold);padding:10px 0 6px;margin-top:8px;border-bottom:1px solid rgba(254,69,0,0.2);margin-bottom:8px">📅 ${dayLabel}</div>`;
+    html += `<div style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:2px;color:#24bdb5;padding:10px 0 6px;margin-top:8px;border-bottom:1px solid rgba(36,189,181,0.25);margin-bottom:8px">📅 ${dayLabel}</div>`;
     html += '<div class="form-card" style="margin-bottom:12px">';
     matches.forEach((m, idx) => {
       if (idx > 0) html += matchSeparator();
@@ -1553,8 +1558,13 @@ function schedulePronoSave(matchId, field, val) {
   clearTimeout(saveTimers[matchId]);
   saveTimers[matchId] = setTimeout(async()=>{
     const p=myPronos[matchId];
-    await upsertProno(String(matchId), p);
+    const complete = p.pick && p.bonus_def && p.bonus_off !== undefined && p.bonus_off !== null && p.bonus_off !== '';
     const el=document.getElementById('pst-'+matchId);
+    if (!complete) {
+      if (el) el.innerHTML='<span style="color:var(--text3);font-size:12px">Réponds aux 3 questions pour valider</span>';
+      return;
+    }
+    await upsertProno(String(matchId), p);
     if (el) el.innerHTML='<span style="color:var(--green);font-size:13px">✓ Enregistré</span>';
     updateDashboard();
   },400);
