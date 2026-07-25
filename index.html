@@ -51,7 +51,7 @@ body{font-family:'Aptos','Outfit',system-ui,sans-serif;background:var(--bg);colo
 .user-avatar{width:28px;height:28px;background:var(--gold);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0;letter-spacing:-0.5px}
 
 /* ── HERO ── */
-.hero{background:#24bdb5;padding:0;text-align:center;border-bottom:3px solid var(--yellow);position:relative;overflow:hidden;color:#fff}
+.hero{background:#fe4500;padding:0;text-align:center;border-bottom:3px solid var(--yellow);position:relative;overflow:hidden;color:#fff}
 .hero-confetti{position:absolute;inset:0;pointer-events:none;overflow:hidden}
 .hero-inner{position:relative;z-index:2;padding:1.5rem 1rem 1rem}
 .hero-logo{display:flex;justify-content:center;align-items:center;padding:1.5rem 0 0.5rem;position:relative;z-index:2}
@@ -101,6 +101,9 @@ select.form-input{appearance:none;cursor:pointer}
 .vs{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--text3);text-align:center}
 .match-date{font-size:15px;color:var(--text2);text-align:center;grid-column:1/-1;margin-top:6px}
 .score-input{width:100%;text-align:center;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px;color:var(--text);font-family:'Bebas Neue',sans-serif;font-size:1.4rem;outline:none;transition:border .2s;-moz-appearance:textfield;appearance:textfield}
+input[type=number]{-moz-appearance:textfield;appearance:textfield}
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
 .score-input::-webkit-outer-spin-button,.score-input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
 .score-input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(254,69,0,0.15);transform:scale(1.05)}
 .locked-badge{font-size:12px;background:rgba(239,68,68,0.15);color:var(--red);border:1px solid rgba(239,68,68,0.3);border-radius:4px;padding:2px 8px;display:inline-block}
@@ -603,7 +606,7 @@ const ADMIN_PSEUDO = 'Admin CSE';
 
       <!-- Édition drapeaux -->
       <div id="admin-edit-flags" style="display:none">
-        <div class="info-box">Uploade une image par équipe (idéalement un rectangle, ex: 60×40px, format PNG/JPG/WebP, &lt;500 Ko). Elle remplace le drapeau partout dans l'appli dès l'upload — pas besoin d'un bouton "Enregistrer" séparé.</div>
+        <div class="info-box">Uploade une image par équipe — format libre (silhouette détourée, forme organique, etc.), fond transparent recommandé (PNG ou WebP), &lt;500 Ko. L'image est affichée en entier, sans recadrage. Elle remplace le drapeau partout dans l'appli dès l'upload — pas besoin d'un bouton "Enregistrer" séparé.</div>
         <div id="admin-flags-list" class="form-card" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px"></div>
       </div>
 
@@ -704,8 +707,8 @@ function flagImgTag(team, side) {
   if (!team) return '';
   const url = TEAM_FLAG_URLS[team];
   if (!url) return '';
-  const margin = side === 'left' ? 'margin-right:6px' : 'margin-left:6px';
-  return `<img src="${url}" alt="" style="width:20px;height:14px;object-fit:cover;border-radius:2px;vertical-align:middle;${margin};box-shadow:0 0 0 1px rgba(0,0,0,0.12)">`;
+  const margin = side === 'left' ? 'margin-right:5px' : 'margin-left:5px';
+  return `<img src="${url}" alt="" style="width:26px;height:26px;object-fit:contain;vertical-align:middle;${margin};filter:drop-shadow(0 1px 3px rgba(0,0,0,0.3))">`;
 }
 function flag(team) { return flagImgTag(team, 'left'); }
 function flagInline(team) { return flagImgTag(team, 'right'); }
@@ -1436,7 +1439,7 @@ function matchSeparator() {
 function pick1n2Button(m, value, label) {
   const pred = myPronos[m.id] || {};
   const active = pred.pick === value;
-  return `<button onclick="schedulePronoSave(${m.id},'pick','${value}')" style="flex:1;padding:8px 4px;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:1px;border-radius:6px;border:1px solid ${active?'var(--gold)':'var(--border)'};background:${active?'var(--gold)':'var(--bg3)'};color:${active?'#111':'var(--text2)'};cursor:pointer">${label}</button>`;
+  return `<button onclick="schedulePronoSave(${m.id},'pick','${value}')" style="width:44px;padding:8px 0;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:1px;border-radius:6px;border:1px solid ${active?'var(--gold)':'var(--border)'};background:${active?'var(--gold)':'var(--bg3)'};color:${active?'#111':'var(--text2)'};cursor:pointer">${label}</button>`;
 }
 function halftimeLeaderButtons(m) {
   const pred = myPronos[m.id] || {};
@@ -1469,7 +1472,12 @@ function matchRow(m) {
     <span style="${phaseLabelStyle}">${m.phase}</span>
     <span style="font-family:'Bebas Neue',sans-serif;font-size:0.85rem;letter-spacing:1px;color:var(--text3)">MATCH ${matchNum}</span>
   </div>`;
-  const teamSpan = (team, side) => `<span style="display:inline-flex;align-items:center;gap:6px;font-size:15px;font-weight:700;text-transform:uppercase;white-space:nowrap;letter-spacing:0.3px">${side==='left'?flag(team):''}${team}${side==='right'?flagInline(team):''}</span>`;
+  // Colonne équipe : largeur fixe symétrique gauche/droite, le nom peut passer sur 2 lignes
+  const teamCol = (team, side) => `<div style="display:flex;flex-direction:column;align-items:${side==='left'?'flex-end':'flex-start'};gap:4px;text-align:${side==='left'?'right':'left'}">
+    ${side==='right'?'':flag(team)}
+    <span style="font-size:14px;font-weight:700;text-transform:uppercase;line-height:1.15;letter-spacing:0.3px">${team}</span>
+    ${side==='right'?flagInline(team):''}
+  </div>`;
   if (locked) {
     const res = allResults[m.id];
     let badge = '';
@@ -1489,27 +1497,27 @@ function matchRow(m) {
     const boLine = res ? `<div style="font-size:11px;color:${(pred.bonus_off!==undefined&&pred.bonus_off!==null&&pred.bonus_off!==''&&Number(pred.bonus_off)===Number(res.bonus_off))?'var(--green)':'var(--text3)'}">Bonus Offensif — Toi : ${pred.bonus_off!==undefined&&pred.bonus_off!==null&&pred.bonus_off!==''?pred.bonus_off:'–'} · Réel : ${res.bonus_off!==undefined&&res.bonus_off!==null?res.bonus_off:'–'}</div>` : '';
     return `<div class="match-row" data-match-id="${m.id}" style="display:block;padding:12px 4px">
       ${gl}
-      <div style="display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap">
-        ${teamSpan(m.home,'left')}
-        ${myPick}
-        ${teamSpan(m.away,'right')}
+      <div style="display:grid;grid-template-columns:1fr auto 1fr;align-items:center;column-gap:12px">
+        ${teamCol(m.home,'left')}
+        <div style="text-align:center">${myPick}</div>
+        ${teamCol(m.away,'right')}
       </div>
-      <div style="text-align:center;margin-top:4px">${bdLine}${boLine}</div>
+      <div style="text-align:center;margin-top:6px">${bdLine}${boLine}</div>
       <div style="display:flex;flex-direction:column;align-items:center;gap:2px;margin-top:6px">${resDisplay}${badge}<button onclick="showAllPronos(${m.id},'${(m.home+' vs '+m.away).replace(/'/g,"\\'")}')" style="margin-top:4px;font-size:11px;padding:3px 8px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;color:var(--text2);cursor:pointer">👥 Voir tous</button></div>
     </div>`;
   }
   return `<div class="match-row" data-match-id="${m.id}" style="display:block;padding:12px 4px">
     ${gl}
-    <div style="display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap">
-      ${teamSpan(m.home,'left')}
+    <div style="display:grid;grid-template-columns:1fr auto 1fr;align-items:center;column-gap:12px">
+      ${teamCol(m.home,'left')}
       <div style="display:flex;gap:6px">
         ${pick1n2Button(m,'1','1')}
         ${pick1n2Button(m,'N','N')}
         ${pick1n2Button(m,'2','2')}
       </div>
-      ${teamSpan(m.away,'right')}
+      ${teamCol(m.away,'right')}
     </div>
-    <div style="max-width:420px;margin:8px auto 0">
+    <div style="max-width:420px;margin:10px auto 0">
       ${halftimeLeaderButtons(m)}
       ${triesInput(m)}
     </div>
@@ -2065,7 +2073,7 @@ function renderAdminFlags() {
     const safeId = 'flagfile-' + team.replace(/[^a-z0-9]/gi,'_');
     return `<div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:10px;display:flex;flex-direction:column;gap:8px;align-items:center">
       <div style="width:100%;display:flex;align-items:center;gap:8px">
-        <div style="width:36px;height:24px;border-radius:3px;background:${url?'transparent':'var(--bg4)'};background-image:${url?`url('${url}')`:'none'};background-size:cover;background-position:center;flex-shrink:0;box-shadow:0 0 0 1px var(--border2)"></div>
+        <div style="width:38px;height:38px;border-radius:6px;background:${url?'transparent':'var(--bg4)'};background-image:${url?`url('${url}')`:'none'};background-size:contain;background-repeat:no-repeat;background-position:center;flex-shrink:0;${url?'filter:drop-shadow(0 1px 3px rgba(0,0,0,0.25))':'box-shadow:0 0 0 1px var(--border2)'}"></div>
         <div style="font-size:14px;font-weight:600;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${team}</div>
       </div>
       <input type="file" accept="image/png,image/jpeg,image/webp" id="${safeId}" style="width:100%;font-size:12px" onchange="uploadTeamFlag('${team.replace(/'/g,"\\'")}', this)">
