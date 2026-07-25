@@ -99,6 +99,7 @@ select.form-input{appearance:none;cursor:pointer}
 .match-row.pool-c:hover{background:#f7ecfd}
 .match-row.pool-d:hover{background:#e1fbfa}
 .match-row.pool-e:hover{background:#fff3e3}
+.match-row.pool-b:hover{background:#e2fcef}
 .match-row:last-child{border-bottom:none}
 .team-name{font-size:17px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
 .team-name.left{text-align:right}
@@ -743,7 +744,7 @@ const GROUP_START = {
   'D':'2027-10-04','E':'2027-10-05','F':'2027-10-06'
 };
 // Couleurs des poules alignées sur le site officiel rugbyworldcup.com/2027
-const POOL_COLORS = { A:'#b353f3', B:'#34D399', C:'#ff559c', D:'#01dfea', E:'#fe9901', F:'#6366F1' };
+const POOL_COLORS = { A:'#b353f3', B:'#00f35d', C:'#ff559c', D:'#01dfea', E:'#fe9901', F:'#6366F1' };
 function poolColor(phase) {
   if (!phase || !phase.startsWith('Poule ')) return null;
   return POOL_COLORS[phase.replace('Poule ', '').trim()] || null;
@@ -1448,7 +1449,7 @@ function pick1n2Button(m, value, label) {
   const pred = myPronos[m.id] || {};
   const active = pred.pick === value;
   const ac = poolColor(m.phase) || 'var(--gold)';
-  return `<button onclick="schedulePronoSave(${m.id},'pick','${value}')" style="width:44px;padding:8px 0;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:1px;border-radius:6px;border:1px solid ${active?ac:'var(--border)'};background:${active?ac:'var(--bg3)'};color:${active?'#fff':'var(--text2)'};cursor:pointer">${label}</button>`;
+  return `<button onclick="schedulePronoSave(${m.id},'pick','${value}')" style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:1px;border-radius:6px;border:1px solid ${active?ac:'var(--border)'};background:${active?ac:'var(--bg3)'};color:${active?'#fff':'var(--text2)'};cursor:pointer;box-sizing:border-box">${label}</button>`;
 }
 function halftimeLeaderButtons(m) {
   const pred = myPronos[m.id] || {};
@@ -1456,7 +1457,7 @@ function halftimeLeaderButtons(m) {
   const ac = poolColor(m.phase) || 'var(--gold)';
   const mkBtn = (v, txt) => {
     const active = val === v;
-    return `<button onclick="schedulePronoSave(${m.id},'bonus_def','${v}')" style="flex:1;padding:6px 4px;font-size:12px;border-radius:5px;border:1px solid ${active?ac:'var(--border)'};background:${active?ac:'var(--bg3)'};color:${active?'#fff':'var(--text3)'};cursor:pointer">${txt}</button>`;
+    return `<button onclick="schedulePronoSave(${m.id},'bonus_def','${v}')" style="flex:1;height:44px;display:flex;align-items:center;justify-content:center;padding:0 4px;font-size:12px;border-radius:5px;border:1px solid ${active?ac:'var(--border)'};background:${active?ac:'var(--bg3)'};color:${active?'#fff':'var(--text3)'};cursor:pointer;box-sizing:border-box">${txt}</button>`;
   };
   return `<div style="margin-top:4px">
     <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:5px">Bonus Défensif — Qui mènera à la mi-temps ?</div>
@@ -1466,9 +1467,11 @@ function halftimeLeaderButtons(m) {
 function triesInput(m) {
   const pred = myPronos[m.id] || {};
   const val = pred.bonus_off !== undefined && pred.bonus_off !== null ? pred.bonus_off : '';
+  const filled = val !== '';
+  const ac = poolColor(m.phase) || 'var(--gold)';
   return `<div style="margin-top:8px">
     <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:5px">Bonus Offensif — Nombre total d'essais dans le match</div>
-    <input type="number" min="0" max="30" placeholder="–" value="${val}" oninput="schedulePronoSave(${m.id},'bonus_off',this.value)" style="width:100%;padding:6px 8px;font-size:14px;border-radius:5px;border:1px solid var(--border);background:var(--bg3);color:var(--text);text-align:center">
+    <input type="number" min="0" max="30" placeholder="–" value="${val}" oninput="schedulePronoSave(${m.id},'bonus_off',this.value)" style="width:44px;height:44px;padding:0;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;border-radius:6px;border:1px solid ${filled?ac:'var(--border)'};background:${filled?ac:'var(--bg3)'};color:${filled?'#fff':'var(--text)'};text-align:center;box-sizing:border-box">
   </div>`;
 }
 function matchRow(m) {
