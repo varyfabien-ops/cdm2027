@@ -1497,11 +1497,11 @@ function matchRow(m) {
   const phaseLabelStyle = pc
     ? `font-family:'Bebas Neue',sans-serif;font-size:0.8rem;letter-spacing:1.5px;color:#fff;background:${pc};padding:2px 10px;border-radius:20px`
     : `font-family:'Bebas Neue',sans-serif;font-size:0.85rem;letter-spacing:2px;color:var(--gold);opacity:0.8`;
-  const gl = `<div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:2px">
+  const gl = `<div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:6px;gap:8px">
     <span style="${phaseLabelStyle}">${m.phase}</span>
+    <span style="font-family:'Bebas Neue',sans-serif;font-size:0.8rem;letter-spacing:1px;color:#000;text-transform:uppercase;white-space:nowrap">${new Date(m.deadline).toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',year:'numeric'})} ${new Date(m.deadline).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}</span>
     <span style="font-family:'Bebas Neue',sans-serif;font-size:0.85rem;letter-spacing:1px;color:var(--text3)">MATCH ${matchNum}</span>
-  </div>
-  <div style="text-align:center;font-size:11px;color:#24bdb5;font-weight:600;padding-bottom:6px">Clôture : ${new Date(m.deadline).toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',year:'numeric'})} ${new Date(m.deadline).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}</div>`;
+  </div>`;
   // Colonne équipe : drapeau + nom sur une seule ligne, alignée à l'extérieur
   const teamCol = (team, side) => `<div class="team-col team-col-${side}" style="display:flex;align-items:center;gap:6px;justify-content:${side==='left'?'flex-end':'flex-start'};white-space:nowrap">
     ${side==='right'?'':flag(team)}
@@ -1552,7 +1552,7 @@ function matchRow(m) {
       ${halftimeLeaderButtons(m)}
       ${triesInput(m)}
     </div>` : ''}
-    <div id="pst-${m.id}" style="text-align:center;margin-top:6px"><span class="countdown" data-deadline="${new Date(m.deadline).getTime()}" style="color:#24bdb5;font-weight:600"></span><br><span style="color:#24bdb5;font-size:13px">${new Date(m.deadline).toLocaleDateString('fr-FR',{day:'2-digit',month:'short'})} à ${new Date(m.deadline).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}</span></div>
+    <div id="pst-${m.id}" style="text-align:center;margin-top:6px"><span class="countdown" data-deadline="${new Date(m.deadline).getTime()}" style="color:#24bdb5;font-weight:600"></span></div>
   </div>`;
 }
 
@@ -1683,7 +1683,7 @@ async function loadRanking() {
   document.getElementById('ranking-table').innerHTML='<div class="empty-state"><p>Chargement...</p></div>';
 
   const [{ data: snapshots }, { data: players }, { data: pronoCounts }] = await Promise.all([
-    sb.from('ranking_snapshots').select('pseudo,points,exact,position,match_number').order('position', { ascending: true }),
+    sb.from('ranking_snapshots').select('pseudo,points,points_match,points_bd,points_bo,position,match_number').order('position', { ascending: true }),
     sb.from('players').select('pseudo'),
     sb.from('pronos').select('pseudo').neq('match_id','special').limit(20000)
   ]);
@@ -1700,10 +1700,10 @@ async function loadRanking() {
     lastSnaps.forEach(s => {
       if (!dedupMap[s.pseudo] || s.points > dedupMap[s.pseudo].points) dedupMap[s.pseudo] = s;
     });
-    ranked = Object.values(dedupMap).map(s => ({ pseudo: s.pseudo, points: s.points, exact: s.exact||0, count: counts[s.pseudo]||0 }));
+    ranked = Object.values(dedupMap).map(s => ({ pseudo: s.pseudo, points: s.points, pointsMatch: s.points_match||0, pointsBD: s.points_bd||0, pointsBO: s.points_bo||0, count: counts[s.pseudo]||0 }));
     (players||[]).forEach(p => {
       if (!ranked.find(r => r.pseudo === p.pseudo))
-        ranked.push({ pseudo: p.pseudo, points: 0, exact: 0, count: counts[p.pseudo]||0 });
+        ranked.push({ pseudo: p.pseudo, points: 0, pointsMatch: 0, pointsBD: 0, pointsBO: 0, count: counts[p.pseudo]||0 });
     });
   } else {
     await loadResults();
@@ -1721,7 +1721,7 @@ async function loadRanking() {
       return { pseudo, ...sc, count:Object.keys(d.pronos).length };
     });
   }
-  ranked.sort((a,b)=>b.points-a.points||b.exact-a.exact);
+  ranked.sort((a,b)=>b.points-a.points);
 
   if (currentPseudo) {
     const pos = ranked.findIndex(r=>r.pseudo===currentPseudo);
@@ -1732,16 +1732,19 @@ async function loadRanking() {
   }
   document.getElementById('stat-participants').textContent = ranked.length;
 
-  let html=`<div class="rank-row header"><div></div><div>Participant</div><div style="text-align:center">Points</div></div>`;
+  const rankGrid = '40px 1fr 90px 110px 110px 110px';
+  let html=`<div class="rank-row header" style="grid-template-columns:${rankGrid}"><div></div><div>Participant</div><div style="text-align:center">Points Totaux</div><div style="text-align:center">Résultats Matchs</div><div style="text-align:center">Bonus Défensif</div><div style="text-align:center">Bonus Offensif</div></div>`;
   ranked.forEach((r,i)=>{
     const medals=['🥇','🥈','🥉'];
     const cls = i===0?'gold':i===1?'silver':i===2?'bronze':'';
     const isMe = r.pseudo===currentPseudo;
-    html+=`<div class="rank-row" style="${isMe?'background:rgba(254,69,0,0.07)':''}">
+    html+=`<div class="rank-row" style="grid-template-columns:${rankGrid};${isMe?'background:rgba(254,69,0,0.07)':''}">
       <div class="rank-num ${cls}">${medals[i]||('#'+(i+1))}</div>
       <div class="rank-pseudo">${r.pseudo}${isMe?' <span style="font-size:13px;color:var(--gold)">(moi)</span>':''}</div>
-      <div class="rank-pts">${r.points}</div>
-      
+      <div class="rank-pts" style="text-align:center">${r.points}</div>
+      <div style="text-align:center">${r.pointsMatch||0}</div>
+      <div style="text-align:center">${r.pointsBD||0}</div>
+      <div style="text-align:center">${r.pointsBO||0}</div>
     </div>`;
   });
   document.getElementById('ranking-table').innerHTML=html;
