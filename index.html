@@ -99,6 +99,7 @@ select.form-input{appearance:none;cursor:pointer}
 .match-row.pool-c:hover{background:#f7ecfd}
 .match-row.pool-d:hover{background:#e1fbfa}
 .match-row.pool-e:hover{background:#fff3e3}
+.match-row.pool-f:hover{background:#ecf2fe}
 .match-row.pool-b:hover{background:#e2fcef}
 .match-row:last-child{border-bottom:none}
 .team-name{font-size:17px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
@@ -745,7 +746,7 @@ const GROUP_START = {
   'D':'2027-10-04','E':'2027-10-05','F':'2027-10-06'
 };
 // Couleurs des poules alignées sur le site officiel rugbyworldcup.com/2027
-const POOL_COLORS = { A:'#b353f3', B:'#00f35d', C:'#ff559c', D:'#01dfea', E:'#fe9901', F:'#6366F1' };
+const POOL_COLORS = { A:'#b353f3', B:'#00f35d', C:'#ff559c', D:'#01dfea', E:'#fe9901', F:'#4193ff' };
 function poolColor(phase) {
   if (!phase || !phase.startsWith('Poule ')) return null;
   return POOL_COLORS[phase.replace('Poule ', '').trim()] || null;
